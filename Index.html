@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VELVET — 18+ Video Streaming</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #090909;
+      color: #fff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(9,9,9,.96);
+      border-bottom: 1px solid #292929;
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: #e8a0b8;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+    }
+
+    nav a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #e8a0b8;
+    }
+
+    .hero {
+      min-height: 500px;
+      padding: 90px 7%;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, #090909 20%, rgba(9,9,9,.75), rgba(9,9,9,.15)),
+        linear-gradient(135deg, #421323, #160b12 60%, #090909);
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e8a0b8;
+      color: #160b12;
+      padding: 7px 13px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      color: #c7c7c7;
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 0;
+      background: #e8a0b8;
+      color: #160b12;
+      padding: 14px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      margin-left: 8px;
+      background: #242424;
+      color: white;
+    }
+
+    main {
+      padding: 45px 5%;
+    }
+
+    .section-title {
+      font-size: 27px;
+      margin-bottom: 22px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 20px;
+    }
+
+    .category {
+      white-space: nowrap;
+      border: 1px solid #333;
+      background: #151515;
+      color: #ddd;
+      padding: 10px 17px;
+      border-radius: 25px;
+    }
+
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #151515;
+      border: 1px solid #272727;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #e8a0b8;
+    }
+
+    .thumb {
+      height: 145px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4b1729, #171017);
+      color: #e8a0b8;
+      font-size: 42px;
+    }
+
+    .card-body {
+      padding: 15px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #999;
+      font-size: 13px;
+    }
+
+    .watch {
+      display: inline-block;
+      margin-top: 13px;
+      color: #e8a0b8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .premium {
+      margin: 55px 0;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      background: linear-gradient(135deg, #32101d, #170c12);
+      border: 1px solid #5d263b;
+    }
+
+    .premium h2 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .premium p {
+      color: #bbb;
+      margin-bottom: 22px;
+    }
+
+    footer {
+      padding: 35px 5%;
+      border-top: 1px solid #292929;
+      color: #777;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .age-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,.97);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .age-box {
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      background: #171717;
+      border: 1px solid #3a3a3a;
+      border-radius: 16px;
+      padding: 40px 25px;
+    }
+
+    .age-box .logo {
+      margin-bottom: 25px;
+      display: block;
+    }
+
+    .age-box h2 {
+      margin-bottom: 12px;
+    }
+
+    .age-box p {
+      color: #aaa;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    @media (max-width: 650px) {
+      header {
+        padding: 14px 5%;
+      }
+
+      nav {
+        gap: 10px;
+      }
+
+      nav a:nth-child(2),
+      nav a:nth-child(3) {
+        display: none;
+      }
+
+      .hero {
+        min-height: 460px;
+        padding: 70px 7%;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .premium {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="age-gate" id="ageGate">
+    <div class="age-box">
+      <span class="logo">VELVET</span>
+      <h2>18+ ONLY</h2>
+      <p>
+        This website is intended only for adults aged 18 years or older.
+        By entering, you confirm that you are legally permitted to access
+        adult-oriented content in your location.
+      </p>
+      <button class="btn" onclick="enterSite()">I AM 18+</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="logo">VELVET</div>
+
+    <nav>
+      <a href="#">Home</a>
+      <a href="#browse">Browse</a>
+      <a href="#premium">Premium</a>
+      <a href="#login">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">18+ ADULT PLATFORM</span>
+
+      <h1>Watch. Discover. Enjoy.</h1>
+
+      <p>
+        A premium-style video streaming experience designed for adults,
+        with categories, creators, search and personalized viewing.
+      </p>
+
+      <a class="btn" href="#browse">Explore Videos</a>
+      <a class="btn secondary" href="#premium">Go Premium</a>
+    </div>
+  </section>
+
+  <main id="browse">
+
+    <h2 class="section-title">Browse Categories</h2>
+
+    <div class="categories">
+      <div class="category">Featured</div>
+      <div class="category">Trending</div>
+      <div class="category">New</div>
+      <div class="category">Creators</div>
+      <div class="category">Premium</div>
+    </div>
+
+    <h2 class="section-title">Featured Videos</h2>
+
+    <div class="videos">
+
+      <div class="card">
+        <div class="thumb">▶</div>
+        <div class="card-body">
+          <h3>Featured Video 01</h3>
+          <p>Premium creator content</p>
+          <a class="watch" href="#">WATCH NOW →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">▶</div>
+        <div class="card-body">
+          <h3>Trending Video 02</h3>
+          <p>Popular this week</p>
+          <a class="watch" href="#">WATCH NOW →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">▶</div>
+        <div class="card-body">
+          <h3>Creator Video 03</h3>
+          <p>New creator upload</p>
+          <a class="watch" href="#">WATCH NOW →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">▶</div>
+        <div class="card-body">
+          <h3>Premium Video 04</h3>
+          <p>Members collection</p>
+          <a class="watch" href="#">WATCH NOW →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <section class="premium" id="premium">
+      <h2>Unlock Premium</h2>
+      <p>
+        Create a membership system for exclusive, legally uploaded content.
+      </p>
+      <button class="btn" onclick="alert('Membership system coming next!')">
+        JOIN PREMIUM
+      </button>
+    </section>
+
+  </main>
+
+  <footer id="login">
+    <strong>VELVET</strong><br>
+    18+ only · Terms · Privacy · Copyright · Report Content<br>
+    © 2026 Velvet. All rights reserved.
+  </footer>
+
+  <script>
+    function enterSite() {
+      document.getElementById("ageGate").style.display = "none";
+      localStorage.setItem("velvetAgeVerified", "true");
+    }
+
+    if (localStorage.getItem("velvetAgeVerified") === "true") {
+      document.getElementById("ageGate").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
