@@ -1,434 +1,997 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VELVET — 18+ Video Streaming</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<title>VELVET — Premium Video Platform</title>
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #090909;
-      color: #fff;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(9,9,9,.96);
-      border-bottom: 1px solid #292929;
-      padding: 16px 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .logo {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 4px;
-      color: #e8a0b8;
-    }
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#090909;
+  color:#fff;
+}
 
-    nav {
-      display: flex;
-      gap: 22px;
-    }
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(9,9,9,.96);
+  border-bottom:1px solid #292929;
+  padding:20px;
+}
 
-    nav a {
-      color: #ddd;
-      text-decoration: none;
-      font-size: 14px;
-    }
+.nav{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-    nav a:hover {
-      color: #e8a0b8;
-    }
+.logo{
+  color:#e89aba;
+  font-size:32px;
+  font-weight:800;
+  letter-spacing:6px;
+}
 
-    .hero {
-      min-height: 500px;
-      padding: 90px 7%;
-      display: flex;
-      align-items: center;
-      background:
-        linear-gradient(90deg, #090909 20%, rgba(9,9,9,.75), rgba(9,9,9,.15)),
-        linear-gradient(135deg, #421323, #160b12 60%, #090909);
-    }
+.nav-links{
+  display:flex;
+  gap:25px;
+}
 
-    .hero-content {
-      max-width: 650px;
-    }
+.nav-links a{
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+}
 
-    .badge {
-      display: inline-block;
-      background: #e8a0b8;
-      color: #160b12;
-      padding: 7px 13px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 12px;
-      margin-bottom: 20px;
-    }
+.hero{
+  min-height:650px;
+  display:flex;
+  align-items:center;
+  padding:70px 20px;
+  background:
+    radial-gradient(circle at 80% 20%,#351322 0%,transparent 40%),
+    #090909;
+}
 
-    h1 {
-      font-size: clamp(42px, 8vw, 76px);
-      line-height: 1;
-      margin-bottom: 20px;
-    }
+.hero-inner{
+  max-width:1100px;
+  width:100%;
+  margin:auto;
+}
 
-    .hero p {
-      color: #c7c7c7;
-      font-size: 17px;
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
+.badge{
+  display:inline-block;
+  background:#e89aba;
+  color:#160b10;
+  padding:14px 22px;
+  border-radius:30px;
+  font-weight:bold;
+  margin-bottom:30px;
+}
 
-    .btn {
-      display: inline-block;
-      border: 0;
-      background: #e8a0b8;
-      color: #160b12;
-      padding: 14px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 800;
-      cursor: pointer;
-    }
+.hero h1{
+  font-size:clamp(48px,9vw,92px);
+  line-height:.95;
+  max-width:800px;
+  margin-bottom:30px;
+}
 
-    .btn.secondary {
-      margin-left: 8px;
-      background: #242424;
-      color: white;
-    }
+.hero p{
+  color:#bbb;
+  font-size:20px;
+  line-height:1.7;
+  max-width:700px;
+  margin-bottom:35px;
+}
 
-    main {
-      padding: 45px 5%;
-    }
+.buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
 
-    .section-title {
-      font-size: 27px;
-      margin-bottom: 22px;
-    }
+.btn{
+  border:none;
+  border-radius:12px;
+  padding:17px 28px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+}
 
-    .categories {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 20px;
-    }
+.btn-primary{
+  background:#e89aba;
+  color:#160b10;
+}
 
-    .category {
-      white-space: nowrap;
-      border: 1px solid #333;
-      background: #151515;
-      color: #ddd;
-      padding: 10px 17px;
-      border-radius: 25px;
-    }
+.btn-dark{
+  background:#242424;
+  color:#fff;
+}
 
-    .videos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:60px 20px;
+}
 
-    .card {
-      background: #151515;
-      border: 1px solid #272727;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform .2s, border-color .2s;
-    }
+.section-title{
+  font-size:36px;
+  margin-bottom:25px;
+}
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: #e8a0b8;
-    }
+.search-box{
+  margin-bottom:30px;
+}
 
-    .thumb {
-      height: 145px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #4b1729, #171017);
-      color: #e8a0b8;
-      font-size: 42px;
-    }
+.search-box input{
+  width:100%;
+  padding:18px;
+  border-radius:12px;
+  border:1px solid #333;
+  background:#151515;
+  color:white;
+  font-size:16px;
+  outline:none;
+}
 
-    .card-body {
-      padding: 15px;
-    }
+.categories{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding-bottom:10px;
+  margin-bottom:40px;
+}
 
-    .card h3 {
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
+.category{
+  white-space:nowrap;
+  padding:14px 24px;
+  border:1px solid #3b3b3b;
+  border-radius:30px;
+  background:#151515;
+  color:#ddd;
+  cursor:pointer;
+}
 
-    .card p {
-      color: #999;
-      font-size: 13px;
-    }
+.category:hover,
+.category.active{
+  background:#e89aba;
+  color:#160b10;
+}
 
-    .watch {
-      display: inline-block;
-      margin-top: 13px;
-      color: #e8a0b8;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: bold;
-    }
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:25px;
+}
 
-    .premium {
-      margin: 55px 0;
-      padding: 40px;
-      border-radius: 15px;
-      text-align: center;
-      background: linear-gradient(135deg, #32101d, #170c12);
-      border: 1px solid #5d263b;
-    }
+.video-card{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:20px;
+  overflow:hidden;
+  transition:.25s;
+}
 
-    .premium h2 {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
+.video-card:hover{
+  transform:translateY(-4px);
+  border-color:#e89aba;
+}
 
-    .premium p {
-      color: #bbb;
-      margin-bottom: 22px;
-    }
+.video-card video{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  display:block;
+  background:#24111b;
+}
 
-    footer {
-      padding: 35px 5%;
-      border-top: 1px solid #292929;
-      color: #777;
-      text-align: center;
-      font-size: 13px;
-      line-height: 1.8;
-    }
+.video-info{
+  padding:22px;
+}
 
-    .age-gate {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: rgba(0,0,0,.97);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
-    }
+.video-info h3{
+  font-size:22px;
+  margin-bottom:10px;
+}
 
-    .age-box {
-      max-width: 440px;
-      width: 100%;
-      text-align: center;
-      background: #171717;
-      border: 1px solid #3a3a3a;
-      border-radius: 16px;
-      padding: 40px 25px;
-    }
+.video-info p{
+  color:#999;
+  margin-bottom:18px;
+}
 
-    .age-box .logo {
-      margin-bottom: 25px;
-      display: block;
-    }
+.watch{
+  color:#e89aba;
+  font-weight:bold;
+  text-decoration:none;
+}
 
-    .age-box h2 {
-      margin-bottom: 12px;
-    }
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
 
-    .age-box p {
-      color: #aaa;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
+.gallery-card{
+  overflow:hidden;
+  border-radius:18px;
+  background:#151515;
+  border:1px solid #292929;
+}
 
-    @media (max-width: 650px) {
-      header {
-        padding: 14px 5%;
-      }
+.gallery-card img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  display:block;
+  transition:.3s;
+}
 
-      nav {
-        gap: 10px;
-      }
+.gallery-card:hover img{
+  transform:scale(1.04);
+}
 
-      nav a:nth-child(2),
-      nav a:nth-child(3) {
-        display: none;
-      }
+.gallery-card p{
+  padding:15px;
+  color:#ccc;
+}
 
-      .hero {
-        min-height: 460px;
-        padding: 70px 7%;
-      }
+.creators{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
 
-      .hero p {
-        font-size: 15px;
-      }
+.creator{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:25px;
+  text-align:center;
+}
 
-      .premium {
-        padding: 30px 20px;
-      }
-    }
-  </style>
+.creator img{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:15px;
+}
+
+.creator h3{
+  margin-bottom:8px;
+}
+
+.creator p{
+  color:#999;
+  margin-bottom:15px;
+}
+
+.follow{
+  background:#e89aba;
+  color:#160b10;
+  border:none;
+  border-radius:10px;
+  padding:10px 20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.premium{
+  margin-top:20px;
+  background:linear-gradient(135deg,#29111d,#171017);
+  border:1px solid #6c3048;
+  border-radius:25px;
+  padding:50px 30px;
+  text-align:center;
+}
+
+.premium h2{
+  font-size:42px;
+  margin-bottom:15px;
+}
+
+.premium p{
+  color:#aaa;
+  max-width:600px;
+  margin:0 auto 25px;
+  line-height:1.7;
+}
+
+.login-box{
+  max-width:500px;
+  margin:auto;
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:20px;
+  padding:30px;
+}
+
+.login-box input{
+  width:100%;
+  margin-bottom:15px;
+  padding:16px;
+  border-radius:10px;
+  border:1px solid #333;
+  background:#0d0d0d;
+  color:#fff;
+}
+
+footer{
+  border-top:1px solid #292929;
+  padding:40px 20px;
+  text-align:center;
+  color:#777;
+}
+
+footer strong{
+  color:#e89aba;
+  font-size:24px;
+  letter-spacing:4px;
+}
+
+.age-gate{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,.94);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.age-box{
+  max-width:450px;
+  width:100%;
+  background:#151515;
+  border:1px solid #444;
+  border-radius:22px;
+  padding:35px;
+  text-align:center;
+}
+
+.age-box h2{
+  font-size:32px;
+  margin-bottom:15px;
+}
+
+.age-box p{
+  color:#aaa;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:700px){
+
+  .logo{
+    font-size:27px;
+  }
+
+  .nav-links{
+    gap:15px;
+  }
+
+  .nav-links a{
+    font-size:14px;
+  }
+
+  .hero{
+    min-height:600px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+
+  .video-grid,
+  .gallery{
+    grid-template-columns:1fr;
+  }
+
+  .creators{
+    grid-template-columns:1fr;
+  }
+
+  .video-card video{
+    height:220px;
+  }
+
+  .gallery-card img{
+    height:280px;
+  }
+
+  .premium h2{
+    font-size:32px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="age-gate" id="ageGate">
-    <div class="age-box">
-      <span class="logo">VELVET</span>
-      <h2>18+ ONLY</h2>
-      <p>
-        This website is intended only for adults aged 18 years or older.
-        By entering, you confirm that you are legally permitted to access
-        adult-oriented content in your location.
-      </p>
-      <button class="btn" onclick="enterSite()">I AM 18+</button>
-    </div>
+<!-- AGE GATE -->
+<div class="age-gate" id="ageGate">
+
+  <div class="age-box">
+
+    <div class="badge">18+</div>
+
+    <h2>Welcome to VELVET</h2>
+
+    <p>
+      This website is intended for adults only.
+      By entering, you confirm that you are 18 years
+      of age or older.
+    </p>
+
+    <button class="btn btn-primary" onclick="enterSite()">
+      I AM 18+ — ENTER
+    </button>
+
   </div>
 
-  <header>
-    <div class="logo">VELVET</div>
+</div>
 
-    <nav>
-      <a href="#">Home</a>
-      <a href="#browse">Browse</a>
-      <a href="#premium">Premium</a>
+<!-- HEADER -->
+<header>
+
+  <div class="nav">
+
+    <div class="logo">
+      VELVET
+    </div>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
       <a href="#login">Login</a>
-    </nav>
-  </header>
+    </div>
 
-  <section class="hero">
-    <div class="hero-content">
-      <span class="badge">18+ ADULT PLATFORM</span>
+  </div>
 
-      <h1>Watch. Discover. Enjoy.</h1>
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+  <div class="hero-inner">
+
+    <div class="badge">
+      18+ ADULT PLATFORM
+    </div>
+
+    <h1>
+      Watch.<br>
+      Discover.<br>
+      Enjoy.
+    </h1>
+
+    <p>
+      A premium-style video streaming experience
+      designed for adults, with categories,
+      creators, search and personalized viewing.
+    </p>
+
+    <div class="buttons">
+
+      <a href="#videos" class="btn btn-primary">
+        Explore Videos
+      </a>
+
+      <a href="#premium" class="btn btn-dark">
+        Go Premium
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- BROWSE -->
+<section class="container">
+
+  <h2 class="section-title">
+    Browse Categories
+  </h2>
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search videos or creators..."
+      onkeyup="searchContent()"
+    >
+
+  </div>
+
+  <div class="categories">
+
+    <button class="category active">
+      Featured
+    </button>
+
+    <button class="category">
+      Trending
+    </button>
+
+    <button class="category">
+      New
+    </button>
+
+    <button class="category">
+      Creators
+    </button>
+
+    <button class="category">
+      Popular
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- VIDEOS -->
+<section class="container" id="videos">
+
+  <h2 class="section-title">
+    Featured Videos
+  </h2>
+
+  <div class="video-grid" id="videoGrid">
+
+    <div class="video-card searchable">
+
+      <video
+        controls
+        poster="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=80">
+
+        <source
+          src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+          type="video/mp4">
+
+      </video>
+
+      <div class="video-info">
+
+        <h3>Featured Video 01</h3>
+
+        <p>
+          Premium creator content
+        </p>
+
+        <a href="#" class="watch">
+          WATCH NOW →
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="video-card searchable">
+
+      <video
+        controls
+        poster="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1000&q=80">
+
+        <source
+          src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+          type="video/mp4">
+
+      </video>
+
+      <div class="video-info">
+
+        <h3>Trending Video 02</h3>
+
+        <p>
+          Popular this week
+        </p>
+
+        <a href="#" class="watch">
+          WATCH NOW →
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="video-card searchable">
+
+      <video
+        controls
+        poster="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=80">
+
+        <source
+          src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+          type="video/mp4">
+
+      </video>
+
+      <div class="video-info">
+
+        <h3>New Video 03</h3>
+
+        <p>
+          Recently added
+        </p>
+
+        <a href="#" class="watch">
+          WATCH NOW →
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="video-card searchable">
+
+      <video
+        controls
+        poster="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1000&q=80">
+
+        <source
+          src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+          type="video/mp4">
+
+      </video>
+
+      <div class="video-info">
+
+        <h3>Premium Video 04</h3>
+
+        <p>
+          Exclusive collection
+        </p>
+
+        <a href="#" class="watch">
+          WATCH NOW →
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- GALLERY -->
+<section class="container">
+
+  <h2 class="section-title">
+    Featured Gallery
+  </h2>
+
+  <div class="gallery">
+
+    <div class="gallery-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=80"
+        alt="Featured photo">
 
       <p>
-        A premium-style video streaming experience designed for adults,
-        with categories, creators, search and personalized viewing.
+        Featured Photo 01
       </p>
 
-      <a class="btn" href="#browse">Explore Videos</a>
-      <a class="btn secondary" href="#premium">Go Premium</a>
-    </div>
-  </section>
-
-  <main id="browse">
-
-    <h2 class="section-title">Browse Categories</h2>
-
-    <div class="categories">
-      <div class="category">Featured</div>
-      <div class="category">Trending</div>
-      <div class="category">New</div>
-      <div class="category">Creators</div>
-      <div class="category">Premium</div>
     </div>
 
-    <h2 class="section-title">Featured Videos</h2>
 
-    <div class="videos">
+    <div class="gallery-card">
 
-      <div class="card">
-        <div class="thumb">▶</div>
-        <div class="card-body">
-          <h3>Featured Video 01</h3>
-          <p>Premium creator content</p>
-          <a class="watch" href="#">WATCH NOW →</a>
-        </div>
-      </div>
+      <img
+        src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1000&q=80"
+        alt="Featured photo">
 
-      <div class="card">
-        <div class="thumb">▶</div>
-        <div class="card-body">
-          <h3>Trending Video 02</h3>
-          <p>Popular this week</p>
-          <a class="watch" href="#">WATCH NOW →</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="thumb">▶</div>
-        <div class="card-body">
-          <h3>Creator Video 03</h3>
-          <p>New creator upload</p>
-          <a class="watch" href="#">WATCH NOW →</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="thumb">▶</div>
-        <div class="card-body">
-          <h3>Premium Video 04</h3>
-          <p>Members collection</p>
-          <a class="watch" href="#">WATCH NOW →</a>
-        </div>
-      </div>
-
-    </div>
-
-    <section class="premium" id="premium">
-      <h2>Unlock Premium</h2>
       <p>
-        Create a membership system for exclusive, legally uploaded content.
+        Featured Photo 02
       </p>
-      <button class="btn" onclick="alert('Membership system coming next!')">
-        JOIN PREMIUM
+
+    </div>
+
+
+    <div class="gallery-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1000&q=80"
+        alt="Featured photo">
+
+      <p>
+        New Photo 03
+      </p>
+
+    </div>
+
+
+    <div class="gallery-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=1000&q=80"
+        alt="Featured photo">
+
+      <p>
+        Popular Photo 04
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CREATORS -->
+<section class="container">
+
+  <h2 class="section-title">
+    Featured Creators
+  </h2>
+
+  <div class="creators">
+
+    <div class="creator searchable">
+
+      <img
+        src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=500&q=80"
+        alt="Creator">
+
+      <h3>Creator One</h3>
+
+      <p>
+        Premium Creator
+      </p>
+
+      <button class="follow">
+        FOLLOW
       </button>
-    </section>
 
-  </main>
+    </div>
 
-  <footer id="login">
-    <strong>VELVET</strong><br>
-    18+ only · Terms · Privacy · Copyright · Report Content<br>
+
+    <div class="creator searchable">
+
+      <img
+        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80"
+        alt="Creator">
+
+      <h3>Creator Two</h3>
+
+      <p>
+        Featured Creator
+      </p>
+
+      <button class="follow">
+        FOLLOW
+      </button>
+
+    </div>
+
+
+    <div class="creator searchable">
+
+      <img
+        src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80"
+        alt="Creator">
+
+      <h3>Creator Three</h3>
+
+      <p>
+        Popular Creator
+      </p>
+
+      <button class="follow">
+        FOLLOW
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PREMIUM -->
+<section class="container" id="premium">
+
+  <div class="premium">
+
+    <h2>
+      VELVET PREMIUM
+    </h2>
+
+    <p>
+      Unlock premium collections, exclusive creator
+      content and an enhanced viewing experience.
+    </p>
+
+    <button
+      class="btn btn-primary"
+      onclick="premiumMessage()">
+
+      JOIN PREMIUM
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- LOGIN -->
+<section class="container" id="login">
+
+  <h2 class="section-title">
+    Login
+  </h2>
+
+  <div class="login-box">
+
+    <input
+      type="email"
+      placeholder="Email">
+
+    <input
+      type="password"
+      placeholder="Password">
+
+    <button
+      class="btn btn-primary"
+      style="width:100%;"
+      onclick="loginMessage()">
+
+      LOGIN
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <strong>VELVET</strong>
+
+  <p style="margin-top:15px;">
+    18+ only · Terms · Privacy · Copyright
+  </p>
+
+  <p style="margin-top:10px;">
     © 2026 Velvet. All rights reserved.
-  </footer>
+  </p>
 
-  <script>
-    function enterSite() {
-      document.getElementById("ageGate").style.display = "none";
-      localStorage.setItem("velvetAgeVerified", "true");
+</footer>
+
+
+<script>
+
+function enterSite(){
+
+  document
+    .getElementById("ageGate")
+    .classList.add("hidden");
+
+  localStorage.setItem(
+    "velvetAgeVerified",
+    "yes"
+  );
+
+}
+
+
+if(
+  localStorage.getItem("velvetAgeVerified")
+  === "yes"
+){
+
+  document
+    .getElementById("ageGate")
+    .classList.add("hidden");
+
+}
+
+
+function premiumMessage(){
+
+  alert(
+    "Premium system will be connected next."
+  );
+
+}
+
+
+function loginMessage(){
+
+  alert(
+    "Login system will be connected next."
+  );
+
+}
+
+
+function searchContent(){
+
+  const query =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+  const items =
+    document.querySelectorAll(".searchable");
+
+  items.forEach(function(item){
+
+    const text =
+      item.innerText.toLowerCase();
+
+    if(text.includes(query)){
+
+      item.style.display="";
+
+    }else{
+
+      item.style.display="none";
+
     }
 
-    if (localStorage.getItem("velvetAgeVerified") === "true") {
-      document.getElementById("ageGate").style.display = "none";
+  });
+
+}
+
+
+const categories =
+  document.querySelectorAll(".category");
+
+categories.forEach(function(button){
+
+  button.addEventListener(
+    "click",
+    function(){
+
+      categories.forEach(function(item){
+        item.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
     }
-  </script>
-  <section style="padding:40px 20px;">
-  <h2>Featured Gallery</h2>
+  );
 
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;">
+});
 
-    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
-         style="width:100%;border-radius:15px;">
+</script>
 
-    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80"
-         style="width:100%;border-radius:15px;">
-
-  </div>
-</section>
-<section style="padding:40px 20px;">
-  <h2>Featured Gallery</h2>
-
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;">
-
-    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
-         style="width:100%;border-radius:15px;">
-
-    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80"
-         style="width:100%;border-radius:15px;">
-
-  </div>
-</section>
 </body>
 </html>
-
