@@ -3,158 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>VELVET</title>
 
 <style>
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
   background:#080808;
-  color:#fff;
+  color:white;
+  font-family:Arial,sans-serif;
 }
 
-/* =========================
-   HERO / BACKGROUND
-========================= */
+/* BACKGROUND */
 
 .hero{
   min-height:100vh;
 
-  background:
+  background-image:
     linear-gradient(
-      rgba(0,0,0,0.35),
-      rgba(0,0,0,0.75)
+      rgba(0,0,0,.35),
+      rgba(0,0,0,.75)
     ),
     url("IMG_6257.jpeg");
 
   background-size:cover;
   background-position:center;
-  background-repeat:no-repeat;
+  background-attachment:scroll;
 
   display:flex;
   flex-direction:column;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+/* NAVBAR */
 
 nav{
-  width:100%;
-  padding:25px 7%;
+  padding:22px 6%;
 
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
 
-  border-bottom:1px solid rgba(255,255,255,0.15);
-  background:rgba(0,0,0,0.25);
-  backdrop-filter:blur(8px);
+  background:rgba(0,0,0,.45);
+  border-bottom:1px solid #333;
 }
 
 .logo{
-  color:#e7a0bd;
-  font-size:38px;
-  font-weight:800;
-  letter-spacing:7px;
+  color:#e5a0bd;
+  font-size:34px;
+  font-weight:bold;
+  letter-spacing:6px;
 }
 
-.nav-links{
-  display:flex;
-  gap:30px;
-}
-
-.nav-links a{
-  color:#fff;
+nav a{
+  color:white;
   text-decoration:none;
-  font-size:18px;
+  margin-left:20px;
+  font-size:16px;
 }
 
-.nav-links a:hover{
-  color:#e7a0bd;
+nav a:hover{
+  color:#e5a0bd;
 }
 
-/* =========================
-   HERO CONTENT
-========================= */
+/* HERO */
 
 .hero-content{
   flex:1;
 
   display:flex;
   flex-direction:column;
-  align-items:center;
+
   justify-content:center;
+  align-items:center;
 
   text-align:center;
-  padding:40px 20px;
+  padding:30px;
 }
 
 .hero-content h1{
-  font-size:78px;
+  font-size:70px;
   letter-spacing:12px;
-  margin-bottom:20px;
 }
 
 .hero-content p{
-  max-width:650px;
+  max-width:600px;
+  margin-top:20px;
+
   color:#ddd;
-  font-size:20px;
-  line-height:1.7;
+  font-size:18px;
+  line-height:1.6;
 }
 
-.main-button{
-  display:inline-block;
+.button{
+  margin-top:30px;
 
-  margin-top:35px;
-  padding:16px 35px;
+  padding:15px 30px;
 
-  background:#e7a0bd;
+  background:#e5a0bd;
   color:#111;
 
-  border-radius:30px;
   text-decoration:none;
+  border-radius:30px;
 
-  font-size:16px;
   font-weight:bold;
-  letter-spacing:1px;
 }
 
-.main-button:hover{
-  background:#fff;
+/* SECTIONS */
+
+.section{
+  padding:70px 6%;
 }
 
-/* =========================
-   SECTIONS
-========================= */
-
-.container{
-  padding:75px 7%;
+.title{
+  font-size:38px;
+  margin-bottom:12px;
 }
 
-.section-title{
-  font-size:40px;
-  margin-bottom:40px;
-}
-
-.section-subtitle{
+.subtitle{
   color:#999;
-  margin-top:-25px;
   margin-bottom:35px;
 }
 
-/* =========================
-   GALLERY
-========================= */
+/* GALLERY */
 
 .gallery{
   display:grid;
@@ -162,56 +137,46 @@ nav{
   gap:25px;
 }
 
-.gallery-card{
-  overflow:hidden;
-
+.card{
   background:#151515;
 
   border:1px solid #333;
   border-radius:18px;
 
-  transition:transform .3s ease,
-             border-color .3s ease;
+  overflow:hidden;
 }
 
-.gallery-card:hover{
-  transform:translateY(-5px);
-  border-color:#e7a0bd;
-}
-
-.gallery-card img{
-  display:block;
-
+.card img{
   width:100%;
-  height:420px;
+  height:430px;
+
+  display:block;
 
   object-fit:cover;
 }
 
-.gallery-info{
+.card-content{
   padding:20px;
 }
 
-.gallery-info h3{
+.card-content h3{
   font-size:22px;
   margin-bottom:8px;
 }
 
-.gallery-info p{
+.card-content p{
   color:#999;
 }
 
-/* =========================
-   VIDEOS
-========================= */
+/* VIDEOS */
 
-.video-grid{
+.videos{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:25px;
 }
 
-.video-card{
+.video{
   background:#151515;
 
   border:1px solid #333;
@@ -220,146 +185,107 @@ nav{
   overflow:hidden;
 }
 
-.video-placeholder{
-  height:300px;
+.video-box{
+  height:280px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  background:
-    linear-gradient(
-      135deg,
-      #321322,
-      #100b0f
-    );
+  background:linear-gradient(
+    135deg,
+    #40172b,
+    #100a0e
+  );
 }
 
-.play-button{
-  width:80px;
-  height:80px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:#e7a0bd;
-  color:#111;
+.play{
+  width:75px;
+  height:75px;
 
   border-radius:50%;
 
-  font-size:30px;
+  background:#e5a0bd;
+  color:#111;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:28px;
 }
 
-.video-info{
-  padding:25px;
+.video-content{
+  padding:22px;
 }
 
-.video-info h3{
-  font-size:23px;
+.video-content h3{
+  font-size:22px;
   margin-bottom:10px;
 }
 
-.video-info p{
+.video-content p{
   color:#999;
-  line-height:1.5;
 }
 
-.watch{
-  display:inline-block;
-
-  margin-top:18px;
-
-  color:#e7a0bd;
-  text-decoration:none;
-
-  font-weight:bold;
-}
-
-/* =========================
-   PREMIUM SECTION
-========================= */
+/* PREMIUM */
 
 .premium{
   text-align:center;
 
-  padding:90px 7%;
+  padding:80px 20px;
 
-  background:
-    linear-gradient(
-      rgba(20,5,12,.95),
-      rgba(10,5,8,.95)
-    );
+  background:#120a0e;
 }
 
 .premium h2{
-  font-size:42px;
+  font-size:40px;
   margin-bottom:15px;
 }
 
 .premium p{
-  max-width:650px;
-  margin:auto;
-
   color:#aaa;
-  line-height:1.7;
+  line-height:1.6;
 }
 
 .premium-button{
   display:inline-block;
 
-  margin-top:30px;
-  padding:16px 35px;
+  margin-top:25px;
 
-  border:1px solid #e7a0bd;
+  padding:15px 30px;
+
+  color:#e5a0bd;
+
+  border:1px solid #e5a0bd;
   border-radius:30px;
 
-  color:#e7a0bd;
   text-decoration:none;
-  font-weight:bold;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer{
-  padding:45px 20px;
-
   text-align:center;
+  padding:40px 20px;
 
   border-top:1px solid #292929;
 
-  color:#888;
+  color:#777;
 }
 
 footer strong{
-  color:#e7a0bd;
+  color:#e5a0bd;
   font-size:25px;
   letter-spacing:4px;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:700px){
 
-  nav{
-    padding:20px;
-  }
-
   .logo{
     font-size:27px;
-    letter-spacing:5px;
-  }
-
-  .nav-links{
-    gap:15px;
-  }
-
-  .nav-links a{
-    font-size:15px;
   }
 
   .hero-content h1{
@@ -368,14 +294,14 @@ footer strong{
   }
 
   .hero-content p{
-    font-size:17px;
+    font-size:16px;
   }
 
-  .container{
+  .section{
     padding:55px 20px;
   }
 
-  .section-title{
+  .title{
     font-size:32px;
   }
 
@@ -383,20 +309,16 @@ footer strong{
     grid-template-columns:1fr;
   }
 
-  .gallery-card img{
-    height:430px;
-  }
-
-  .video-grid{
+  .videos{
     grid-template-columns:1fr;
   }
 
-  .video-placeholder{
-    height:250px;
+  .card img{
+    height:430px;
   }
 
-  .premium h2{
-    font-size:32px;
+  .video-box{
+    height:240px;
   }
 }
 </style>
@@ -405,9 +327,7 @@ footer strong{
 
 <body>
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <section class="hero" id="home">
 
@@ -417,7 +337,7 @@ footer strong{
       VELVET
     </div>
 
-    <div class="nav-links">
+    <div>
       <a href="#home">Home</a>
       <a href="#gallery">Gallery</a>
       <a href="#videos">Videos</a>
@@ -432,11 +352,10 @@ footer strong{
 
     <p>
       Welcome to Velvet — a premium visual space
-      for beautiful photography, creators and
-      exclusive content.
+      for photography, creators and exclusive content.
     </p>
 
-    <a href="#gallery" class="main-button">
+    <a href="#gallery" class="button">
       EXPLORE GALLERY
     </a>
 
@@ -445,41 +364,37 @@ footer strong{
 </section>
 
 
-<!-- =========================
-     FEATURED GALLERY
-========================= -->
+<!-- GALLERY -->
 
-<section class="container" id="gallery">
+<section class="section" id="gallery">
 
-  <h2 class="section-title">
+  <h2 class="title">
     Featured Gallery
   </h2>
 
-  <p class="section-subtitle">
-    Explore our featured collection.
+  <p class="subtitle">
+    Explore the latest Velvet collection.
   </p>
 
 
   <div class="gallery">
 
 
-    <!-- PHOTO 1 -->
+    <!-- IMAGE 1 -->
 
-    <div class="gallery-card">
+    <div class="card">
 
-      <img
-        src="IMG_6251.jpeg"
-        alt="Featured Photo 01"
-      >
+      <img src="IMG_6251.jpeg"
+           alt="Velvet Photo 1">
 
-      <div class="gallery-info">
+      <div class="card-content">
 
         <h3>
-          Featured Photo 01
+          Velvet Collection 01
         </h3>
 
         <p>
-          Velvet Collection
+          Featured Photo
         </p>
 
       </div>
@@ -487,23 +402,21 @@ footer strong{
     </div>
 
 
-    <!-- PHOTO 2 -->
+    <!-- IMAGE 2 -->
 
-    <div class="gallery-card">
+    <div class="card">
 
-      <img
-        src="IMG_6256.jpeg"
-        alt="Featured Photo 02"
-      >
+      <img src="IMG_6256.jpeg"
+           alt="Velvet Photo 2">
 
-      <div class="gallery-info">
+      <div class="card-content">
 
         <h3>
-          Featured Photo 02
+          Velvet Collection 02
         </h3>
 
         <p>
-          Velvet Collection
+          Featured Photo
         </p>
 
       </div>
@@ -511,23 +424,21 @@ footer strong{
     </div>
 
 
-    <!-- PHOTO 3 -->
+    <!-- IMAGE 3 -->
 
-    <div class="gallery-card">
+    <div class="card">
 
-      <img
-        src="photo1.jpeg"
-        alt="Featured Photo 03"
-      >
+      <img src="photo1.jpeg"
+           alt="Velvet Photo 3">
 
-      <div class="gallery-info">
+      <div class="card-content">
 
         <h3>
-          Featured Photo 03
+          Velvet Collection 03
         </h3>
 
         <p>
-          Velvet Collection
+          Featured Photo
         </p>
 
       </div>
@@ -535,23 +446,21 @@ footer strong{
     </div>
 
 
-    <!-- PHOTO 4 -->
+    <!-- IMAGE 4 -->
 
-    <div class="gallery-card">
+    <div class="card">
 
-      <img
-        src="photo2.jpeg"
-        alt="Featured Photo 04"
-      >
+      <img src="photo2.jpeg"
+           alt="Velvet Photo 4">
 
-      <div class="gallery-info">
+      <div class="card-content">
 
         <h3>
-          Featured Photo 04
+          Velvet Collection 04
         </h3>
 
         <p>
-          Velvet Collection
+          Featured Photo
         </p>
 
       </div>
@@ -559,23 +468,21 @@ footer strong{
     </div>
 
 
-    <!-- PHOTO 5 -->
+    <!-- IMAGE 5 -->
 
-    <div class="gallery-card">
+    <div class="card">
 
-      <img
-        src="photo3.jpeg"
-        alt="Featured Photo 05"
-      >
+      <img src="photo3.jpeg"
+           alt="Velvet Photo 5">
 
-      <div class="gallery-info">
+      <div class="card-content">
 
         <h3>
-          Featured Photo 05
+          Velvet Collection 05
         </h3>
 
         <p>
-          Velvet Collection
+          Featured Photo
         </p>
 
       </div>
@@ -588,35 +495,33 @@ footer strong{
 </section>
 
 
-<!-- =========================
-     VIDEOS
-========================= -->
+<!-- VIDEOS -->
 
-<section class="container" id="videos">
+<section class="section" id="videos">
 
-  <h2 class="section-title">
+  <h2 class="title">
     Featured Videos
   </h2>
 
-  <p class="section-subtitle">
+  <p class="subtitle">
     Premium creator content.
   </p>
 
 
-  <div class="video-grid">
+  <div class="videos">
 
 
-    <div class="video-card">
+    <div class="video">
 
-      <div class="video-placeholder">
+      <div class="video-box">
 
-        <div class="play-button">
+        <div class="play">
           ▶
         </div>
 
       </div>
 
-      <div class="video-info">
+      <div class="video-content">
 
         <h3>
           Featured Video 01
@@ -626,26 +531,22 @@ footer strong{
           Premium creator content.
         </p>
 
-        <a href="#" class="watch">
-          WATCH NOW →
-        </a>
-
       </div>
 
     </div>
 
 
-    <div class="video-card">
+    <div class="video">
 
-      <div class="video-placeholder">
+      <div class="video-box">
 
-        <div class="play-button">
+        <div class="play">
           ▶
         </div>
 
       </div>
 
-      <div class="video-info">
+      <div class="video-content">
 
         <h3>
           Trending Video 02
@@ -654,10 +555,6 @@ footer strong{
         <p>
           Popular this week.
         </p>
-
-        <a href="#" class="watch">
-          WATCH NOW →
-        </a>
 
       </div>
 
@@ -669,9 +566,7 @@ footer strong{
 </section>
 
 
-<!-- =========================
-     PREMIUM
-========================= -->
+<!-- PREMIUM -->
 
 <section class="premium">
 
@@ -691,15 +586,11 @@ footer strong{
 </section>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
 
-  <strong>
-    VELVET
-  </strong>
+  <strong>VELVET</strong>
 
   <br><br>
 
