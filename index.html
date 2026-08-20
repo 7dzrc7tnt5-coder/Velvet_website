@@ -2,1392 +2,765 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VELVET — Live Creator Platform</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>VELVET</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#08090d;
-  --card:#11131a;
-  --card2:#181b24;
-  --border:#292d38;
-  --pink:#e99ab9;
-  --purple:#9d7cff;
-  --muted:#9298a7;
-  --green:#43d98b;
-  --red:#ff5575;
+ --bg:#08070d;
+ --card:#12101b;
+ --card2:#191622;
+ --pink:#ff5fa2;
+ --purple:#8d6cff;
+ --gold:#ffc857;
+ --cyan:#52d9ff;
+ --green:#4be39a;
+ --text:#fff;
+ --muted:#aaa5b8;
+ --border:#292534;
 }
-
-html{
-  scroll-behavior:smooth;
-}
-
 body{
-  background:var(--bg);
-  color:white;
-  font-family:Arial,Helvetica,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ font-family:Inter,Arial,sans-serif;
+ min-height:100vh;
 }
-
-/* NAV */
-
-.nav{
-  position:sticky;
-  top:0;
-  z-index:100;
-
-  height:70px;
-  padding:0 5%;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  background:rgba(8,9,13,.92);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(15px);
+button{font:inherit;cursor:pointer}
+.top{
+ height:64px;
+ position:sticky;
+ top:0;
+ z-index:20;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 16px;
+ background:rgba(8,7,13,.94);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--border);
 }
-
 .logo{
-  font-size:28px;
-  font-weight:900;
-  letter-spacing:5px;
-  color:var(--pink);
+ font-size:24px;
+ font-weight:900;
+ letter-spacing:4px;
+ color:var(--pink);
 }
-
-.nav-links{
-  display:flex;
-  gap:25px;
+.top-right{display:flex;align-items:center;gap:9px}
+.coin-mini{
+ background:#1c1827;
+ border:1px solid #342b42;
+ padding:8px 11px;
+ border-radius:18px;
+ color:#ffd66b;
+ font-weight:700;
+ font-size:13px;
 }
-
-.nav-links a{
-  color:#dfe2ea;
-  text-decoration:none;
-  font-size:15px;
+.avatar-small{
+ width:34px;height:34px;border-radius:50%;
+ display:flex;align-items:center;justify-content:center;
+ background:linear-gradient(135deg,var(--pink),var(--purple));
+ font-weight:800;
 }
-
-.nav-links a:hover{
-  color:var(--pink);
-}
-
-.nav-btn{
-  background:var(--pink);
-  color:#111;
-  border:0;
-  padding:10px 18px;
-  border-radius:22px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* HERO */
-
+main{padding-bottom:90px}
 .hero{
-  padding:75px 5% 60px;
-
-  background:
-    radial-gradient(circle at 15% 20%,rgba(233,154,185,.16),transparent 35%),
-    radial-gradient(circle at 85% 10%,rgba(157,124,255,.14),transparent 35%);
+ padding:24px 16px 18px;
+ background:
+ radial-gradient(circle at 10% 0%,rgba(255,95,162,.22),transparent 38%),
+ radial-gradient(circle at 100% 20%,rgba(141,108,255,.22),transparent 38%);
 }
-
-.hero-grid{
-  max-width:1200px;
-  margin:auto;
-
-  display:grid;
-  grid-template-columns:1.3fr .7fr;
-  gap:40px;
-  align-items:center;
+.hero h1{font-size:31px;line-height:1.1}
+.hero h1 span{color:var(--pink)}
+.hero p{color:var(--muted);font-size:13px;margin-top:9px}
+.hero-actions{display:flex;gap:9px;margin-top:17px}
+.primary,.secondary{
+ border:0;border-radius:13px;padding:12px 17px;font-weight:800
 }
-
-.badge{
-  display:inline-block;
-  padding:8px 13px;
-  border-radius:20px;
-  background:#241722;
-  color:var(--pink);
-  font-size:13px;
-  margin-bottom:20px;
+.primary{background:linear-gradient(135deg,var(--pink),#ff3e86);color:#fff}
+.secondary{background:#211d2c;color:#fff;border:1px solid var(--border)}
+.section{padding:20px 16px 0}
+.head{
+ display:flex;justify-content:space-between;align-items:center;
+ margin-bottom:13px
 }
-
-.hero h1{
-  font-size:62px;
-  line-height:1.05;
-  margin-bottom:20px;
+.head h2{font-size:19px}
+.head span{color:var(--pink);font-size:12px}
+.chips{
+ display:flex;gap:8px;overflow-x:auto;padding-bottom:5px
 }
-
-.hero h1 span{
-  color:var(--pink);
+.chips::-webkit-scrollbar{display:none}
+.chip{
+ white-space:nowrap;
+ padding:9px 14px;border-radius:20px;
+ background:#15131e;border:1px solid var(--border);
+ color:#c7c3d1;font-size:12px
 }
-
-.hero p{
-  color:var(--muted);
-  max-width:620px;
-  line-height:1.7;
-  font-size:17px;
-}
-
-.hero-buttons{
-  display:flex;
-  gap:15px;
-  margin-top:30px;
-  flex-wrap:wrap;
-}
-
-.primary{
-  background:var(--pink);
-  color:#111;
-  padding:14px 24px;
-  border-radius:28px;
-  border:0;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.secondary{
-  background:transparent;
-  color:white;
-  padding:14px 24px;
-  border-radius:28px;
-  border:1px solid var(--border);
-  cursor:pointer;
-}
-
-/* LIVE PREVIEW */
-
-.live-preview{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:25px;
-  padding:18px;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.live-screen{
-  height:330px;
-  border-radius:18px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-
-  background:
-    radial-gradient(circle at 50% 35%,#56334d,#17111c 45%,#090a0e);
-}
-
-.live-avatar{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:38px;
-  font-weight:bold;
-  margin:auto;
-}
-
-.live-label{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-
-  background:#29111a;
-  color:#ff7896;
-
-  padding:7px 11px;
-  border-radius:8px;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:15px;
-}
-
-.dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#ff3e67;
-}
-
-/* SECTIONS */
-
-.section{
-  max-width:1200px;
-  margin:auto;
-  padding:65px 5%;
-}
-
-.section-head{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  margin-bottom:28px;
-}
-
-.section h2{
-  font-size:32px;
-}
-
-.section-head a{
-  color:var(--pink);
-  text-decoration:none;
-  font-size:14px;
-}
-
-/* LIVE CARDS */
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-
-.creator-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  overflow:hidden;
-  transition:.25s;
-}
-
-.creator-card:hover{
-  transform:translateY(-5px);
-  border-color:#454a58;
-}
-
-.creator-image{
-  height:220px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:linear-gradient(145deg,#33202e,#151722);
-  position:relative;
-}
-
-.creator-image.two{
-  background:linear-gradient(145deg,#252047,#12131d);
-}
-
-.creator-image.three{
-  background:linear-gradient(145deg,#213d3a,#12171a);
-}
-
-.creator-image.four{
-  background:linear-gradient(145deg,#443126,#151313);
-}
-
-.avatar{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  font-size:30px;
-  font-weight:bold;
-}
-
-.live-pill{
-  position:absolute;
-  top:12px;
-  left:12px;
-
-  background:#ff3e67;
-  padding:6px 9px;
-  border-radius:7px;
-
-  font-size:11px;
-  font-weight:bold;
-}
-
-.viewer-count{
-  position:absolute;
-  right:12px;
-  bottom:12px;
-
-  background:rgba(0,0,0,.7);
-  padding:6px 9px;
-  border-radius:7px;
-
-  font-size:11px;
-}
-
-.creator-info{
-  padding:16px;
-}
-
-.creator-info h3{
-  margin-bottom:6px;
-}
-
-.creator-info p{
-  color:var(--muted);
-  font-size:13px;
-}
-
-.watch-btn{
-  width:100%;
-  margin-top:15px;
-
-  padding:10px;
-
-  background:#20232c;
-  border:0;
-  color:white;
-
-  border-radius:10px;
-  cursor:pointer;
-}
-
-.watch-btn:hover{
-  background:var(--pink);
-  color:#111;
-}
-
-/* ROOMS */
-
+.chip.active{background:#321728;color:#ff80b4;border-color:#713250}
 .rooms{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:11px
 }
-
 .room{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:20px;
+ position:relative;
+ min-height:178px;
+ border-radius:18px;
+ overflow:hidden;
+ border:1px solid var(--border);
+ background:linear-gradient(145deg,#302038,#111019);
 }
-
-.room-icon{
-  font-size:32px;
-  margin-bottom:15px;
+.room:nth-child(2){background:linear-gradient(145deg,#202d4a,#111019)}
+.room:nth-child(3){background:linear-gradient(145deg,#3d2921,#111019)}
+.room:nth-child(4){background:linear-gradient(145deg,#193c3a,#111019)}
+.room:nth-child(5){background:linear-gradient(145deg,#3d1d38,#111019)}
+.room:nth-child(6){background:linear-gradient(145deg,#28204a,#111019)}
+.room-content{
+ position:absolute;left:12px;right:12px;bottom:11px
 }
-
-.room h3{
-  margin-bottom:8px;
+.room-title{font-size:15px;font-weight:800}
+.room-user{font-size:11px;color:#c6c0d0;margin-top:4px}
+.room-bottom{
+ display:flex;justify-content:space-between;
+ margin-top:9px;font-size:10px;color:#ddd
 }
-
-.room p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.5;
+.live-dot{color:#ff547d}
+.room-tag{
+ position:absolute;top:10px;left:10px;
+ background:#ff3f70;color:white;
+ padding:5px 7px;border-radius:7px;
+ font-size:9px;font-weight:900
 }
-
-.room-footer{
-  display:flex;
-  justify-content:space-between;
-  margin-top:18px;
-  color:#b7bcc9;
-  font-size:12px;
+.vip-tag{
+ position:absolute;top:10px;right:10px;
+ background:#6e4b12;color:#ffd36a;
+ padding:5px 7px;border-radius:7px;
+ font-size:9px;font-weight:800
 }
-
-/* DISCOVER */
-
-.discover{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+.live-grid{
+ display:flex;gap:11px;overflow-x:auto
 }
-
-.discover-card{
-  min-height:160px;
-  border-radius:18px;
-  padding:22px;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:end;
-
-  background:linear-gradient(135deg,#251b29,#11131a);
-  border:1px solid var(--border);
+.live-grid::-webkit-scrollbar{display:none}
+.live-card{
+ min-width:145px;height:190px;border-radius:18px;
+ position:relative;overflow:hidden;
+ background:linear-gradient(150deg,#48233c,#14111c);
+ border:1px solid var(--border)
 }
-
-.discover-card:nth-child(2){
-  background:linear-gradient(135deg,#1d2138,#11131a);
+.live-card:nth-child(2){background:linear-gradient(150deg,#25365b,#14111c)}
+.live-card:nth-child(3){background:linear-gradient(150deg,#304b3f,#14111c)}
+.live-card:nth-child(4){background:linear-gradient(150deg,#4c3822,#14111c)}
+.live-center{
+ position:absolute;inset:0;
+ display:flex;align-items:center;justify-content:center
 }
-
-.discover-card:nth-child(3){
-  background:linear-gradient(135deg,#1c302e,#11131a);
+.face{
+ width:68px;height:68px;border-radius:50%;
+ display:flex;align-items:center;justify-content:center;
+ background:linear-gradient(135deg,var(--pink),var(--purple));
+ font-size:25px;font-weight:900
 }
-
-.discover-card h3{
-  margin-bottom:7px;
+.live-info{position:absolute;bottom:11px;left:11px}
+.live-info strong{font-size:13px}
+.live-info small{display:block;color:#c8c2d0;margin-top:4px}
+.live-now{
+ position:absolute;top:10px;left:10px;
+ background:#ff3f70;padding:5px 7px;border-radius:7px;
+ font-size:9px;font-weight:900
 }
-
-.discover-card p{
-  color:var(--muted);
-  font-size:13px;
+.wallet{
+ background:linear-gradient(135deg,#21192c,#14111d);
+ border:1px solid #382d48;
+ border-radius:19px;
+ padding:18px
 }
-
-/* FEATURES */
-
-.features{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
+.wallet-top{display:flex;justify-content:space-between;align-items:center}
+.wallet-balance{font-size:27px;font-weight:900;color:#ffd35c}
+.wallet-label{font-size:11px;color:var(--muted)}
+.buy-grid{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:8px;margin-top:15px
 }
-
-.feature{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:22px;
+.pack{
+ background:#17141f;border:1px solid var(--border);
+ border-radius:12px;padding:11px 6px;text-align:center
 }
-
-.feature-icon{
-  font-size:28px;
-  margin-bottom:15px;
+.pack b{color:#ffd35c;font-size:13px}
+.pack small{display:block;color:#aaa;font-size:10px;margin:4px 0}
+.pack button{
+ border:0;background:#2a2134;color:white;
+ border-radius:8px;padding:7px 10px;font-size:10px
 }
-
-.feature h3{
-  margin-bottom:8px;
+.pack.best{border-color:#ff5fa2;background:#251624}
+.badge{
+ display:inline-block;
+ font-size:9px;background:#4d2639;
+ color:#ff9cc3;padding:4px 6px;border-radius:6px
 }
-
-.feature p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
+.vip{
+ display:flex;align-items:center;gap:15px;
+ background:linear-gradient(135deg,#2d2110,#18130c);
+ border:1px solid #5b4721;
+ padding:16px;border-radius:18px
 }
-
-/* CREATOR CTA */
-
-.creator-cta{
-  max-width:1100px;
-  margin:30px auto 70px;
-
-  padding:45px;
-
-  border-radius:25px;
-
-  background:
-    linear-gradient(135deg,#21131d,#17132a);
-
-  border:1px solid #352b3b;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:30px;
+.vip-icon{
+ width:55px;height:55px;border-radius:16px;
+ display:flex;align-items:center;justify-content:center;
+ background:linear-gradient(135deg,#ffd866,#b97818);
+ color:#241a08;font-size:26px
 }
-
-.creator-cta p{
-  color:var(--muted);
-  margin-top:10px;
-  line-height:1.5;
+.vip h3{font-size:16px}
+.vip p{font-size:11px;color:#bdb4a4;margin-top:5px}
+.vip button{margin-left:auto}
+.gifts{
+ display:flex;gap:9px;overflow-x:auto
 }
-
-/* MODAL */
-
+.gift{
+ min-width:85px;text-align:center;
+ background:#15131e;border:1px solid var(--border);
+ padding:12px 6px;border-radius:14px
+}
+.gift-icon{font-size:29px}
+.gift b{display:block;font-size:11px;margin-top:6px}
+.gift small{color:#ffd35c;font-size:10px}
+.rank{
+ display:flex;align-items:center;gap:12px;
+ background:var(--card);
+ border:1px solid var(--border);
+ padding:12px;border-radius:14px;margin-bottom:8px
+}
+.rank-num{width:25px;text-align:center;color:#ffd35c;font-weight:900}
+.rank-face{
+ width:42px;height:42px;border-radius:50%;
+ background:linear-gradient(135deg,var(--pink),var(--purple));
+ display:flex;align-items:center;justify-content:center;font-weight:900
+}
+.rank-info{flex:1}
+.rank-info b{font-size:13px}
+.rank-info small{display:block;color:var(--muted);margin-top:3px}
+.rank-score{color:#ffd35c;font-size:12px;font-weight:800}
+.profile{
+ background:linear-gradient(145deg,#211625,#111019);
+ border:1px solid var(--border);
+ border-radius:20px;padding:20px;text-align:center
+}
+.profile-face{
+ width:80px;height:80px;border-radius:50%;margin:auto;
+ background:linear-gradient(135deg,var(--pink),var(--purple));
+ display:flex;align-items:center;justify-content:center;
+ font-size:29px;font-weight:900
+}
+.profile h3{margin-top:11px}
+.profile p{color:var(--muted);font-size:12px;margin-top:5px}
+.profile-stats{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ margin-top:17px
+}
+.profile-stats b{display:block}
+.profile-stats small{color:var(--muted);font-size:10px}
+.bottom{
+ position:fixed;bottom:0;left:0;right:0;height:72px;
+ background:rgba(12,10,17,.97);
+ border-top:1px solid var(--border);
+ display:grid;grid-template-columns:repeat(5,1fr);
+ z-index:30
+}
+.nav-item{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ color:#85808f;font-size:10px;gap:5px
+}
+.nav-item span{font-size:21px}
+.nav-item.active{color:var(--pink)}
 .modal{
-  display:none;
-
-  position:fixed;
-  inset:0;
-  z-index:200;
-
-  background:rgba(0,0,0,.75);
-
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
+ display:none;position:fixed;inset:0;z-index:100;
+ background:rgba(0,0,0,.78);
+ align-items:flex-end;justify-content:center
 }
-
-.modal-box{
-  width:100%;
-  max-width:520px;
-
-  background:#11131a;
-  border:1px solid var(--border);
-
-  border-radius:22px;
-  padding:28px;
-
-  position:relative;
+.sheet{
+ width:100%;max-width:520px;
+ background:#12101a;
+ border:1px solid var(--border);
+ border-radius:25px 25px 0 0;
+ padding:22px 18px 30px
 }
-
-.close{
-  position:absolute;
-  right:20px;
-  top:15px;
-
-  font-size:25px;
-  color:#999;
-
-  cursor:pointer;
+.sheet-head{display:flex;justify-content:space-between;align-items:center}
+.close{font-size:25px;color:#aaa;cursor:pointer}
+.option{
+ display:flex;align-items:center;gap:13px;
+ background:#191622;border:1px solid var(--border);
+ padding:14px;border-radius:14px;margin-top:10px
 }
-
-.modal h2{
-  margin-bottom:10px;
+.option-icon{
+ width:42px;height:42px;border-radius:12px;
+ background:#292334;display:flex;align-items:center;justify-content:center;
+ font-size:20px
 }
-
-.modal p{
-  color:var(--muted);
-  line-height:1.6;
-  font-size:14px;
+.option-info{flex:1}
+.option-info b{font-size:13px}
+.option-info small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.price{
+ color:#ffd35c;font-size:12px;font-weight:900
 }
-
-.verify-step{
-  display:flex;
-  gap:15px;
-  align-items:center;
-
-  margin-top:18px;
-  padding:15px;
-
-  background:#191c25;
-  border-radius:12px;
+.notice{
+ margin-top:13px;
+ padding:11px;border-radius:11px;
+ background:#1d1826;color:#aaa4b6;font-size:10px;line-height:1.5
 }
-
-.step-number{
-  width:35px;
-  height:35px;
-  border-radius:50%;
-
-  background:#282c37;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-weight:bold;
-  color:var(--pink);
-}
-
-.status{
-  margin-top:20px;
-  padding:12px;
-  border-radius:10px;
-  background:#13251e;
-  color:var(--green);
-  font-size:13px;
-}
-
-/* FOOTER */
-
-footer{
-  border-top:1px solid var(--border);
-  padding:45px 5%;
-  text-align:center;
-  color:var(--muted);
-}
-
-.footer-logo{
-  color:var(--pink);
-  font-size:25px;
-  letter-spacing:4px;
-  font-weight:bold;
-  margin-bottom:15px;
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-  .hero-grid{
-    grid-template-columns:1fr;
-  }
-
-  .cards{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .features{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .rooms,
-  .discover{
-    grid-template-columns:1fr 1fr;
-  }
-}
-
-@media(max-width:600px){
-
-  .nav{
-    height:auto;
-    min-height:65px;
-    padding:15px 20px;
-  }
-
-  .nav-links{
-    display:none;
-  }
-
-  .nav-btn{
-    padding:9px 13px;
-  }
-
-  .hero{
-    padding:55px 20px;
-  }
-
-  .hero h1{
-    font-size:45px;
-  }
-
-  .hero-grid{
-    gap:30px;
-  }
-
-  .cards,
-  .rooms,
-  .discover,
-  .features{
-    grid-template-columns:1fr;
-  }
-
-  .section{
-    padding:50px 20px;
-  }
-
-  .section h2{
-    font-size:28px;
-  }
-
-  .creator-cta{
-    margin:20px;
-    padding:30px 22px;
-    display:block;
-  }
-
-  .creator-cta button{
-    margin-top:20px;
-  }
+@media(min-width:700px){
+ body{max-width:520px;margin:auto;background:#050409}
+ .top{max-width:520px;margin:auto}
+ .bottom{max-width:520px;margin:auto}
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVIGATION -->
+<header class="top">
+ <div class="logo">VELVET</div>
+ <div class="top-right">
+  <div class="coin-mini" onclick="openCoins()">💎 1,000</div>
+  <div class="avatar-small" onclick="openProfile()">V</div>
+ </div>
+</header>
 
-<nav class="nav">
+<main>
 
-  <div class="logo">VELVET</div>
+<section class="hero">
+ <h1>Welcome to <span>VELVET</span> ✨</h1>
+ <p>Rooms, voices, creators and live moments — all in one place.</p>
 
-  <div class="nav-links">
-    <a href="#home">Home</a>
-    <a href="#live">Live</a>
-    <a href="#rooms">Rooms</a>
-    <a href="#discover">Discover</a>
-  </div>
-
-  <button class="nav-btn" onclick="openLogin()">
-    Sign In
-  </button>
-
-</nav>
-
-
-<!-- HERO -->
-
-<section class="hero" id="home">
-
-  <div class="hero-grid">
-
-    <div>
-
-      <div class="badge">
-        ✦ CREATOR SOCIAL PLATFORM
-      </div>
-
-      <h1>
-        Connect.<br>
-        <span>Go Live.</span><br>
-        Be Seen.
-      </h1>
-
-      <p>
-        VELVET is a next-generation creator platform
-        for live streaming, voice rooms, communities,
-        discovery and creator-fan connections.
-      </p>
-
-      <div class="hero-buttons">
-
-        <button class="primary" onclick="scrollToLive()">
-          🔴 Explore Live
-        </button>
-
-        <button class="secondary" onclick="openCreator()">
-          Become a Creator
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="live-preview">
-
-      <div class="live-screen">
-
-        <div>
-
-          <div class="live-label">
-            <span class="dot"></span>
-            LIVE NOW
-          </div>
-
-          <div class="live-avatar">
-            V
-          </div>
-
-          <h3 style="margin-top:18px;">
-            Velvet Creator
-          </h3>
-
-          <p style="margin-top:7px;color:#aaa;">
-            2.4K viewers
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
+ <div class="hero-actions">
+  <button class="primary" onclick="openCreate()">＋ Create Room</button>
+  <button class="secondary" onclick="goLive()">🔴 Go Live</button>
+ </div>
 </section>
 
+<section class="section">
+ <div class="chips">
+  <div class="chip active">For You</div>
+  <div class="chip">🔥 Trending</div>
+  <div class="chip">🎙️ Voice</div>
+  <div class="chip">🎮 Games</div>
+  <div class="chip">🎵 Music</div>
+  <div class="chip">✨ New</div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="head">
+  <h2>🎙️ Popular Rooms</h2>
+  <span>See all →</span>
+ </div>
+
+ <div class="rooms">
+
+  <div class="room" onclick="joinRoom('Late Night Lounge')">
+   <div class="room-tag">LIVE</div>
+   <div class="room-content">
+    <div class="room-title">Late Night Lounge</div>
+    <div class="room-user">Hosted by Alex ✓</div>
+    <div class="room-bottom">
+     <span>👥 842</span><span>🎁 Active</span>
+    </div>
+   </div>
+  </div>
+
+  <div class="room" onclick="joinRoom('Music Lovers')">
+   <div class="room-tag">LIVE</div>
+   <div class="vip-tag">👑 VIP</div>
+   <div class="room-content">
+    <div class="room-title">Music Lovers</div>
+    <div class="room-user">Hosted by Maya ✓</div>
+    <div class="room-bottom">
+     <span>👥 621</span><span>🎵 Music</span>
+    </div>
+   </div>
+  </div>
+
+  <div class="room" onclick="joinRoom('Chill & Chat')">
+   <div class="room-content">
+    <div class="room-title">Chill & Chat</div>
+    <div class="room-user">Hosted by Riya</div>
+    <div class="room-bottom">
+     <span>👥 294</span><span>💬 Chat</span>
+    </div>
+   </div>
+  </div>
+
+  <div class="room" onclick="joinRoom('Creator Hangout')">
+   <div class="room-tag">LIVE</div>
+   <div class="room-content">
+    <div class="room-title">Creator Hangout</div>
+    <div class="room-user">Hosted by Jay ✓</div>
+    <div class="room-bottom">
+     <span>👥 477</span><span>⭐ Popular</span>
+    </div>
+   </div>
+  </div>
+
+  <div class="room" onclick="joinRoom('Weekend Party')">
+   <div class="vip-tag">ADVANCED</div>
+   <div class="room-content">
+    <div class="room-title">Weekend Party</div>
+    <div class="room-user">Advanced Room</div>
+    <div class="room-bottom">
+     <span>👥 1.2K</span><span>💎 1000</span>
+    </div>
+   </div>
+  </div>
+
+  <div class="room" onclick="joinRoom('Open Community')">
+   <div class="room-content">
+    <div class="room-title">Open Community</div>
+    <div class="room-user">Everyone welcome</div>
+    <div class="room-bottom">
+     <span>👥 183</span><span>🟢 Open</span>
+    </div>
+   </div>
+  </div>
+
+ </div>
+</section>
+
+<section class="section">
+ <div class="head">
+  <h2>🔴 Live Now</h2>
+  <span>View all →</span>
+ </div>
+
+ <div class="live-grid">
+
+  <div class="live-card" onclick="openLive('Alex')">
+   <div class="live-now">● LIVE</div>
+   <div class="live-center"><div class="face">A</div></div>
+   <div class="live-info"><strong>Alex ✓</strong><small>2.4K watching</small></div>
+  </div>
+
+  <div class="live-card" onclick="openLive('Maya')">
+   <div class="live-now">● LIVE</div>
+   <div class="live-center"><div class="face">M</div></div>
+   <div class="live-info"><strong>Maya ✓</strong><small>1.8K watching</small></div>
+  </div>
+
+  <div class="live-card" onclick="openLive('Riya')">
+   <div class="live-now">● LIVE</div>
+   <div class="live-center"><div class="face">R</div></div>
+   <div class="live-info"><strong>Riya ✓</strong><small>956 watching</small></div>
+  </div>
+
+  <div class="live-card" onclick="openLive('Jay')">
+   <div class="live-now">● LIVE</div>
+   <div class="live-center"><div class="face">J</div></div>
+   <div class="live-info"><strong>Jay ✓</strong><small>731 watching</small></div>
+  </div>
+
+ </div>
+</section>
+
+<section class="section">
+ <div class="head"><h2>💎 Your Wallet</h2><span onclick="openCoins()">Buy Coins</span></div>
+
+ <div class="wallet">
+  <div class="wallet-top">
+   <div>
+    <div class="wallet-label">Available Coins</div>
+    <div class="wallet-balance">💎 1,000</div>
+   </div>
+   <span class="badge">BONUS ACTIVE</span>
+  </div>
+
+  <div class="buy-grid">
+   <div class="pack">
+    <b>300 💎</b>
+    <small>₹99</small>
+    <button onclick="buyPack('300','₹99')">Buy</button>
+   </div>
+
+   <div class="pack best">
+    <b>1,000 💎</b>
+    <small>₹300</small>
+    <button onclick="buyPack('1,000','₹300')">Buy</button>
+   </div>
+
+   <div class="pack">
+    <b>2,100 💎</b>
+    <small>₹599</small>
+    <button onclick="buyPack('2,100','₹599')">Buy</button>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="head"><h2>👑 VELVET VIP</h2><span>Benefits →</span></div>
+
+ <div class="vip">
+  <div class="vip-icon">👑</div>
+  <div>
+   <h3>VIP Membership</h3>
+   <p>VIP badge · profile frame · special rooms</p>
+  </div>
+  <button class="primary" onclick="openVip()">Join</button>
+ </div>
+</section>
+
+<section class="section">
+ <div class="head"><h2>🎁 Popular Gifts</h2><span>See all →</span></div>
+
+ <div class="gifts">
+
+  <div class="gift" onclick="sendGift('Rose',10)">
+   <div class="gift-icon">🌹</div>
+   <b>Rose</b><small>10 💎</small>
+  </div>
+
+  <div class="gift" onclick="sendGift('Heart',50)">
+   <div class="gift-icon">💖</div>
+   <b>Heart</b><small>50 💎</small>
+  </div>
+
+  <div class="gift" onclick="sendGift('Crown',500)">
+   <div class="gift-icon">👑</div>
+   <b>Crown</b><small>500 💎</small>
+  </div>
+
+  <div class="gift" onclick="sendGift('Rocket',1000)">
+   <div class="gift-icon">🚀</div>
+   <b>Rocket</b><small>1K 💎</small>
+  </div>
+
+ </div>
+</section>
+
+<section class="section">
+ <div class="head"><h2>🏆 Rankings</h2><span>Weekly →</span></div>
+
+ <div class="rank">
+  <div class="rank-num">1</div>
+  <div class="rank-face">A</div>
+  <div class="rank-info"><b>Alex ✓</b><small>Top Creator</small></div>
+  <div class="rank-score">💎 92K</div>
+ </div>
+
+ <div class="rank">
+  <div class="rank-num">2</div>
+  <div class="rank-face">M</div>
+  <div class="rank-info"><b>Maya ✓</b><small>Music Creator</small></div>
+  <div class="rank-score">💎 76K</div>
+ </div>
+
+ <div class="rank">
+  <div class="rank-num">3</div>
+  <div class="rank-face">R</div>
+  <div class="rank-info"><b>Riya ✓</b><small>Rising Creator</small></div>
+  <div class="rank-score">💎 61K</div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="head"><h2>👤 Your Profile</h2><span>Edit</span></div>
+
+ <div class="profile">
+  <div class="profile-face">V</div>
+  <h3>Velvet User</h3>
+  <p>Level 12 · New Creator</p>
+
+  <div class="profile-stats">
+   <div><b>128</b><small>Following</small></div>
+   <div><b>46</b><small>Followers</small></div>
+   <div><b>12</b><small>Rooms</small></div>
+  </div>
+ </div>
+</section>
+
+</main>
+
+<nav class="bottom">
+ <div class="nav-item active" onclick="scrollTopPage()"><span>🏠</span>Home</div>
+ <div class="nav-item" onclick="scrollRooms()"><span>🎙️</span>Rooms</div>
+ <div class="nav-item" onclick="openLive('VELVET Live')"><span>🔴</span>Live</div>
+ <div class="nav-item" onclick="alert('Messages coming in the next version.')"><span>💬</span>Messages</div>
+ <div class="nav-item" onclick="openProfile()"><span>👤</span>Profile</div>
+</nav>
+
+<!-- CREATE ROOM -->
+
+<div class="modal" id="createModal">
+ <div class="sheet">
+  <div class="sheet-head">
+   <h2>＋ Create Room</h2>
+   <div class="close" onclick="closeModal('createModal')">×</div>
+  </div>
+
+  <div class="option" onclick="createNormal()">
+   <div class="option-icon">🎙️</div>
+   <div class="option-info">
+    <b>Normal Room</b>
+    <small>Create a free voice/chat room</small>
+   </div>
+   <div class="price">FREE</div>
+  </div>
+
+  <div class="option" onclick="createAdvanced()">
+   <div class="option-icon">👑</div>
+   <div class="option-info">
+    <b>Advanced Room</b>
+    <small>Premium features + advanced controls</small>
+   </div>
+   <div class="price">💎 1,000</div>
+  </div>
+
+  <div class="option" onclick="goLive()">
+   <div class="option-icon">🔴</div>
+   <div class="option-info">
+    <b>Start Live Stream</b>
+    <small>Creator verification required</small>
+   </div>
+   <div class="price">VERIFY</div>
+  </div>
+
+  <div class="notice">
+   Demo only: real coin deductions, creator verification and live streaming will be handled by the secure backend.
+  </div>
+ </div>
+</div>
+
+<!-- COINS -->
+
+<div class="modal" id="coinModal">
+ <div class="sheet">
+  <div class="sheet-head">
+   <h2>💎 Buy Coins</h2>
+   <div class="close" onclick="closeModal('coinModal')">×</div>
+  </div>
+
+  <div class="option"><div class="option-icon">💎</div><div class="option-info"><b>300 Coins</b><small>Starter Pack</small></div><div class="price">₹99</div></div>
+
+  <div class="option"><div class="option-icon">💎</div><div class="option-info"><b>1,000 Coins</b><small>Popular</small></div><div class="price">₹300</div></div>
+
+  <div class="option"><div class="option-icon">💎</div><div class="option-info"><b>2,100 Coins</b><small>Bonus Pack</small></div><div class="price">₹599</div></div>
+
+  <div class="option"><div class="option-icon">💎</div><div class="option-info"><b>4,500 Coins</b><small>Pro Pack</small></div><div class="price">₹1,199</div></div>
+
+  <div class="option"><div class="option-icon">💎</div><div class="option-info"><b>10,000 Coins</b><small>Premium Pack</small></div><div class="price">₹2,499</div></div>
+
+  <div class="option"><div class="option-icon">💎</div><div class="option-info"><b>22,000 Coins</b><small>VIP Pack</small></div><div class="price">₹4,999</div></div>
+
+  <div class="notice">
+   Pricing is currently a prototype. Real purchases require a compliant payment system, receipts, refunds, fraud protection and applicable taxes.
+  </div>
+ </div>
+</div>
 
 <!-- LIVE -->
 
-<section class="section" id="live">
-
-  <div class="section-head">
-
-    <div>
-      <h2>🔴 Live Now</h2>
-    </div>
-
-    <a href="#">
-      View All →
-    </a>
-
+<div class="modal" id="liveModal">
+ <div class="sheet">
+  <div class="sheet-head">
+   <h2>🔴 Live Stream</h2>
+   <div class="close" onclick="closeModal('liveModal')">×</div>
   </div>
 
-
-  <div class="cards">
-
-
-    <div class="creator-card">
-
-      <div class="creator-image">
-
-        <div class="live-pill">
-          LIVE
-        </div>
-
-        <div class="avatar">
-          A
-        </div>
-
-        <div class="viewer-count">
-          👁 2.4K
-        </div>
-
-      </div>
-
-      <div class="creator-info">
-
-        <h3>Alex Creator ✓</h3>
-
-        <p>Chat & Lifestyle</p>
-
-        <button class="watch-btn"
-                onclick="openRoom('Alex Creator')">
-          Join Live
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="creator-card">
-
-      <div class="creator-image two">
-
-        <div class="live-pill">
-          LIVE
-        </div>
-
-        <div class="avatar">
-          M
-        </div>
-
-        <div class="viewer-count">
-          👁 1.8K
-        </div>
-
-      </div>
-
-      <div class="creator-info">
-
-        <h3>Maya Studio ✓</h3>
-
-        <p>Music & Conversation</p>
-
-        <button class="watch-btn"
-                onclick="openRoom('Maya Studio')">
-          Join Live
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="creator-card">
-
-      <div class="creator-image three">
-
-        <div class="live-pill">
-          LIVE
-        </div>
-
-        <div class="avatar">
-          R
-        </div>
-
-        <div class="viewer-count">
-          👁 965
-        </div>
-
-      </div>
-
-      <div class="creator-info">
-
-        <h3>Riya Live ✓</h3>
-
-        <p>Fitness & Lifestyle</p>
-
-        <button class="watch-btn"
-                onclick="openRoom('Riya Live')">
-          Join Live
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="creator-card">
-
-      <div class="creator-image four">
-
-        <div class="live-pill">
-          LIVE
-        </div>
-
-        <div class="avatar">
-          J
-        </div>
-
-        <div class="viewer-count">
-          👁 731
-        </div>
-
-      </div>
-
-      <div class="creator-info">
-
-        <h3>Jay Talks ✓</h3>
-
-        <p>Talk & Entertainment</p>
-
-        <button class="watch-btn"
-                onclick="openRoom('Jay Talks')">
-          Join Live
-        </button>
-
-      </div>
-
-    </div>
-
-
+  <div style="height:280px;border-radius:18px;margin-top:15px;background:linear-gradient(145deg,#382037,#111019);display:flex;align-items:center;justify-content:center;text-align:center">
+   <div>
+    <div class="face" style="margin:auto;width:85px;height:85px">V</div>
+    <h3 style="margin-top:15px" id="liveName">VELVET Live</h3>
+    <p style="color:#aaa;margin-top:6px;font-size:12px">Live preview</p>
+   </div>
   </div>
 
-</section>
-
-
-<!-- VOICE ROOMS -->
-
-<section class="section" id="rooms">
-
-  <div class="section-head">
-
-    <h2>🎙️ Voice Rooms</h2>
-
-    <a href="#">
-      Browse Rooms →
-    </a>
-
-  </div>
-
-
-  <div class="rooms">
-
-
-    <div class="room">
-
-      <div class="room-icon">
-        🎙️
-      </div>
-
-      <h3>Late Night Talks</h3>
-
-      <p>
-        Join the conversation and meet new people.
-      </p>
-
-      <div class="room-footer">
-        <span>👥 342 listeners</span>
-        <span>🔴 Live</span>
-      </div>
-
-    </div>
-
-
-    <div class="room">
-
-      <div class="room-icon">
-        🎵
-      </div>
-
-      <h3>Music Lounge</h3>
-
-      <p>
-        Artists and listeners hanging out together.
-      </p>
-
-      <div class="room-footer">
-        <span>👥 218 listeners</span>
-        <span>🔴 Live</span>
-      </div>
-
-    </div>
-
-
-    <div class="room">
-
-      <div class="room-icon">
-        💬
-      </div>
-
-      <h3>Open Community</h3>
-
-      <p>
-        Meet creators and discuss what's trending.
-      </p>
-
-      <div class="room-footer">
-        <span>👥 127 listeners</span>
-        <span>🔴 Live</span>
-      </div>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-<!-- DISCOVER -->
-
-<section class="section" id="discover">
-
-  <div class="section-head">
-
-    <h2>✨ Discover</h2>
-
-    <a href="#">
-      Explore All →
-    </a>
-
-  </div>
-
-
-  <div class="discover">
-
-    <div class="discover-card">
-
-      <h3>Trending Creators</h3>
-
-      <p>
-        Discover creators people are watching now.
-      </p>
-
-    </div>
-
-
-    <div class="discover-card">
-
-      <h3>New Creators</h3>
-
-      <p>
-        Find fresh talent joining VELVET.
-      </p>
-
-    </div>
-
-
-    <div class="discover-card">
-
-      <h3>Popular Communities</h3>
-
-      <p>
-        Join conversations around your interests.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- FEATURES -->
-
-<section class="section">
-
-  <div class="section-head">
-
-    <h2>Everything Creators Need</h2>
-
-  </div>
-
-
-  <div class="features">
-
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        🔴
-      </div>
-
-      <h3>Live Streaming</h3>
-
-      <p>
-        Creators can broadcast live and interact
-        with their audience.
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        🎙️
-      </div>
-
-      <h3>Voice Rooms</h3>
-
-      <p>
-        Host public conversations with speakers,
-        listeners and moderators.
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        ✓
-      </div>
-
-      <h3>Creator Verification</h3>
-
-      <p>
-        Identity and liveness verification can be
-        connected through a compliant KYC provider.
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        🛡️
-      </div>
-
-      <h3>Safety Tools</h3>
-
-      <p>
-        Reports, blocking, moderation and
-        creator safety controls.
-      </p>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-<!-- CREATOR CTA -->
-
-<div class="creator-cta">
-
-  <div>
-
-    <h2>
-      Ready to become a creator?
-    </h2>
-
-    <p>
-      Build your community, go live and connect
-      with your audience.
-    </p>
-
-  </div>
-
-  <button class="primary"
-          onclick="openCreator()">
-    Start Creating
+  <button class="primary" style="width:100%;margin-top:14px" onclick="alert('Real streaming backend will be connected here.')">
+   Enter Live
   </button>
-
+ </div>
 </div>
 
+<!-- VIP -->
 
-<!-- LOGIN MODAL -->
-
-<div class="modal" id="loginModal">
-
-  <div class="modal-box">
-
-    <div class="close"
-         onclick="closeModal('loginModal')">
-      ×
-    </div>
-
-    <h2>Welcome to VELVET</h2>
-
-    <p>
-      Sign in to follow creators, join rooms
-      and participate in the community.
-    </p>
-
-    <button class="primary"
-            style="margin-top:25px;width:100%;"
-            onclick="demoLogin()">
-      Continue
-    </button>
-
+<div class="modal" id="vipModal">
+ <div class="sheet">
+  <div class="sheet-head">
+   <h2>👑 VELVET VIP</h2>
+   <div class="close" onclick="closeModal('vipModal')">×</div>
   </div>
 
+  <div class="option">
+   <div class="option-icon">👑</div>
+   <div class="option-info">
+    <b>VIP Membership</b>
+    <small>Badge · frame · exclusive rooms · special effects</small>
+   </div>
+   <div class="price">Join</div>
+  </div>
+
+  <div class="notice">
+   VIP pricing can be configured later. The final app will connect this to the real subscription/payment system.
+  </div>
+ </div>
 </div>
-
-
-<!-- CREATOR VERIFICATION MODAL -->
-
-<div class="modal" id="creatorModal">
-
-  <div class="modal-box">
-
-    <div class="close"
-         onclick="closeModal('creatorModal')">
-      ×
-    </div>
-
-    <h2>Creator Verification</h2>
-
-    <p>
-      Before live access is enabled, creators will
-      need to complete identity and liveness checks.
-    </p>
-
-
-    <div class="verify-step">
-
-      <div class="step-number">
-        1
-      </div>
-
-      <div>
-        <strong>Account Verification</strong>
-        <p>Email / phone verification</p>
-      </div>
-
-    </div>
-
-
-    <div class="verify-step">
-
-      <div class="step-number">
-        2
-      </div>
-
-      <div>
-        <strong>Identity Verification</strong>
-        <p>Verified identity through KYC provider</p>
-      </div>
-
-    </div>
-
-
-    <div class="verify-step">
-
-      <div class="step-number">
-        3
-      </div>
-
-      <div>
-        <strong>Liveness Check</strong>
-        <p>Live selfie / movement verification</p>
-      </div>
-
-    </div>
-
-
-    <div class="verify-step">
-
-      <div class="step-number">
-        4
-      </div>
-
-      <div>
-        <strong>Creator Approval</strong>
-        <p>Manual review when required</p>
-      </div>
-
-    </div>
-
-
-    <div class="status">
-      🛡️ Verification system ready for backend integration.
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- LIVE ROOM MODAL -->
-
-<div class="modal" id="roomModal">
-
-  <div class="modal-box">
-
-    <div class="close"
-         onclick="closeModal('roomModal')">
-      ×
-    </div>
-
-    <div class="live-label">
-      <span class="dot"></span>
-      LIVE ROOM
-    </div>
-
-    <h2 id="roomTitle">
-      Live Room
-    </h2>
-
-    <p style="margin-top:10px;">
-      This is the frontend preview of a live room.
-      Real streaming will be connected through a
-      live-streaming backend later.
-    </p>
-
-    <button class="primary"
-            style="margin-top:25px;width:100%;"
-            onclick="closeModal('roomModal')">
-      Enter Room
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-  <div class="footer-logo">
-    VELVET
-  </div>
-
-  <p>
-    Live creators · Voice rooms · Communities
-  </p>
-
-  <p style="margin-top:15px;">
-    © 2026 VELVET
-  </p>
-
-</footer>
-
 
 <script>
 
-function openLogin(){
-  document.getElementById("loginModal").style.display="flex";
-}
-
-function openCreator(){
-  document.getElementById("creatorModal").style.display="flex";
+function openModal(id){
+ document.getElementById(id).style.display="flex";
 }
 
 function closeModal(id){
-  document.getElementById(id).style.display="none";
+ document.getElementById(id).style.display="none";
 }
 
-function openRoom(name){
-
-  document.getElementById("roomTitle").innerText =
-    name + " — Live Room";
-
-  document.getElementById("roomModal").style.display="flex";
+function openCreate(){openModal("createModal")}
+function openCoins(){openModal("coinModal")}
+function openVip(){openModal("vipModal")}
+function openProfile(){
+ alert("Profile screen — full profile system will be connected in the next build.");
 }
 
-function scrollToLive(){
-
-  document.getElementById("live").scrollIntoView({
-    behavior:"smooth"
-  });
-
+function joinRoom(name){
+ alert("Joining room: "+name+"\n\nReal voice chat will be connected to the backend.");
 }
 
-function demoLogin(){
-
-  alert(
-    "Demo login successful! Real authentication will be connected in the backend."
-  );
-
-  closeModal("loginModal");
+function openLive(name){
+ document.getElementById("liveName").innerText=name+" — LIVE";
+ openModal("liveModal");
 }
 
-window.onclick=function(event){
+function goLive(){
+ closeModal("createModal");
+ alert("Creator verification required before going Live.\n\nIdentity + liveness verification will be connected through a secure verification provider.");
+}
 
-  if(event.target.classList.contains("modal")){
-    event.target.style.display="none";
-  }
+function createNormal(){
+ closeModal("createModal");
+ alert("Normal Room created! 🎙️\n\nReal room creation will be connected to the backend.");
+}
 
-};
+function createAdvanced(){
+ closeModal("createModal");
+ alert("Advanced Room costs 💎 1,000 coins.\n\nDemo: coin deduction will be connected to the real wallet.");
+}
+
+function buyPack(coins,price){
+ alert("Selected "+coins+" coins for "+price+".\n\nReal payment checkout will be connected later.");
+}
+
+function sendGift(name,coins){
+ alert("🎁 "+name+" selected — "+coins+" coins.\n\nReal wallet/gift system will be connected later.");
+}
+
+function scrollRooms(){
+ document.querySelector(".rooms").scrollIntoView({behavior:"smooth"});
+}
+
+function scrollTopPage(){
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+window.onclick=function(e){
+ if(e.target.classList.contains("modal")){
+  e.target.style.display="none";
+ }
+}
 
 </script>
 
