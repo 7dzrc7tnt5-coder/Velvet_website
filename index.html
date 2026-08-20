@@ -4,486 +4,919 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VELVET</title>
+<title>VELVET — Live Creator Platform</title>
 
 <style>
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --bg:#08090d;
+  --card:#11131a;
+  --card2:#181b24;
+  --border:#292d38;
+  --pink:#e99ab9;
+  --purple:#9d7cff;
+  --muted:#9298a7;
+  --green:#43d98b;
+  --red:#ff5575;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  background:#080808;
+  background:var(--bg);
   color:white;
-  font-family:Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-/* BACKGROUND */
+/* NAV */
 
-.hero{
-  min-height:100vh;
+.nav{
+  position:sticky;
+  top:0;
+  z-index:100;
 
-  background-image:
-    linear-gradient(
-      rgba(0,0,0,.35),
-      rgba(0,0,0,.75)
-    ),
-    url("IMG_6257.jpeg");
-
-  background-size:cover;
-  background-position:center;
-  background-attachment:scroll;
+  height:70px;
+  padding:0 5%;
 
   display:flex;
-  flex-direction:column;
-}
-
-/* NAVBAR */
-
-nav{
-  padding:22px 6%;
-
-  display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 
-  background:rgba(0,0,0,.45);
-  border-bottom:1px solid #333;
+  background:rgba(8,9,13,.92);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(15px);
 }
 
 .logo{
-  color:#e5a0bd;
-  font-size:34px;
-  font-weight:bold;
-  letter-spacing:6px;
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:5px;
+  color:var(--pink);
 }
 
-nav a{
-  color:white;
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+
+.nav-links a{
+  color:#dfe2ea;
   text-decoration:none;
-  margin-left:20px;
-  font-size:16px;
+  font-size:15px;
 }
 
-nav a:hover{
-  color:#e5a0bd;
+.nav-links a:hover{
+  color:var(--pink);
+}
+
+.nav-btn{
+  background:var(--pink);
+  color:#111;
+  border:0;
+  padding:10px 18px;
+  border-radius:22px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 /* HERO */
 
-.hero-content{
-  flex:1;
+.hero{
+  padding:75px 5% 60px;
+
+  background:
+    radial-gradient(circle at 15% 20%,rgba(233,154,185,.16),transparent 35%),
+    radial-gradient(circle at 85% 10%,rgba(157,124,255,.14),transparent 35%);
+}
+
+.hero-grid{
+  max-width:1200px;
+  margin:auto;
+
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:40px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 13px;
+  border-radius:20px;
+  background:#241722;
+  color:var(--pink);
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-size:62px;
+  line-height:1.05;
+  margin-bottom:20px;
+}
+
+.hero h1 span{
+  color:var(--pink);
+}
+
+.hero p{
+  color:var(--muted);
+  max-width:620px;
+  line-height:1.7;
+  font-size:17px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:15px;
+  margin-top:30px;
+  flex-wrap:wrap;
+}
+
+.primary{
+  background:var(--pink);
+  color:#111;
+  padding:14px 24px;
+  border-radius:28px;
+  border:0;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.secondary{
+  background:transparent;
+  color:white;
+  padding:14px 24px;
+  border-radius:28px;
+  border:1px solid var(--border);
+  cursor:pointer;
+}
+
+/* LIVE PREVIEW */
+
+.live-preview{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:25px;
+  padding:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.live-screen{
+  height:330px;
+  border-radius:18px;
 
   display:flex;
-  flex-direction:column;
-
-  justify-content:center;
   align-items:center;
-
+  justify-content:center;
   text-align:center;
-  padding:30px;
+
+  background:
+    radial-gradient(circle at 50% 35%,#56334d,#17111c 45%,#090a0e);
 }
 
-.hero-content h1{
-  font-size:70px;
-  letter-spacing:12px;
-}
-
-.hero-content p{
-  max-width:600px;
-  margin-top:20px;
-
-  color:#ddd;
-  font-size:18px;
-  line-height:1.6;
-}
-
-.button{
-  margin-top:30px;
-
-  padding:15px 30px;
-
-  background:#e5a0bd;
-  color:#111;
-
-  text-decoration:none;
-  border-radius:30px;
-
+.live-avatar{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:38px;
   font-weight:bold;
+  margin:auto;
+}
+
+.live-label{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+
+  background:#29111a;
+  color:#ff7896;
+
+  padding:7px 11px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#ff3e67;
 }
 
 /* SECTIONS */
 
 .section{
-  padding:70px 6%;
+  max-width:1200px;
+  margin:auto;
+  padding:65px 5%;
 }
 
-.title{
-  font-size:38px;
-  margin-bottom:12px;
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  margin-bottom:28px;
 }
 
-.subtitle{
-  color:#999;
-  margin-bottom:35px;
+.section h2{
+  font-size:32px;
 }
 
-/* GALLERY */
+.section-head a{
+  color:var(--pink);
+  text-decoration:none;
+  font-size:14px;
+}
 
-.gallery{
+/* LIVE CARDS */
+
+.cards{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:25px;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
 }
 
-.card{
-  background:#151515;
-
-  border:1px solid #333;
+.creator-card{
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:18px;
-
   overflow:hidden;
+  transition:.25s;
 }
 
-.card img{
+.creator-card:hover{
+  transform:translateY(-5px);
+  border-color:#454a58;
+}
+
+.creator-image{
+  height:220px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:linear-gradient(145deg,#33202e,#151722);
+  position:relative;
+}
+
+.creator-image.two{
+  background:linear-gradient(145deg,#252047,#12131d);
+}
+
+.creator-image.three{
+  background:linear-gradient(145deg,#213d3a,#12171a);
+}
+
+.creator-image.four{
+  background:linear-gradient(145deg,#443126,#151313);
+}
+
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  font-size:30px;
+  font-weight:bold;
+}
+
+.live-pill{
+  position:absolute;
+  top:12px;
+  left:12px;
+
+  background:#ff3e67;
+  padding:6px 9px;
+  border-radius:7px;
+
+  font-size:11px;
+  font-weight:bold;
+}
+
+.viewer-count{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+
+  background:rgba(0,0,0,.7);
+  padding:6px 9px;
+  border-radius:7px;
+
+  font-size:11px;
+}
+
+.creator-info{
+  padding:16px;
+}
+
+.creator-info h3{
+  margin-bottom:6px;
+}
+
+.creator-info p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.watch-btn{
   width:100%;
-  height:430px;
+  margin-top:15px;
 
-  display:block;
+  padding:10px;
 
-  object-fit:cover;
+  background:#20232c;
+  border:0;
+  color:white;
+
+  border-radius:10px;
+  cursor:pointer;
 }
 
-.card-content{
+.watch-btn:hover{
+  background:var(--pink);
+  color:#111;
+}
+
+/* ROOMS */
+
+.rooms{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.room{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
   padding:20px;
 }
 
-.card-content h3{
-  font-size:22px;
-  margin-bottom:8px;
-}
-
-.card-content p{
-  color:#999;
-}
-
-/* VIDEOS */
-
-.videos{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:25px;
-}
-
-.video{
-  background:#151515;
-
-  border:1px solid #333;
-  border-radius:18px;
-
-  overflow:hidden;
-}
-
-.video-box{
-  height:280px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:linear-gradient(
-    135deg,
-    #40172b,
-    #100a0e
-  );
-}
-
-.play{
-  width:75px;
-  height:75px;
-
-  border-radius:50%;
-
-  background:#e5a0bd;
-  color:#111;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:28px;
-}
-
-.video-content{
-  padding:22px;
-}
-
-.video-content h3{
-  font-size:22px;
-  margin-bottom:10px;
-}
-
-.video-content p{
-  color:#999;
-}
-
-/* PREMIUM */
-
-.premium{
-  text-align:center;
-
-  padding:80px 20px;
-
-  background:#120a0e;
-}
-
-.premium h2{
-  font-size:40px;
+.room-icon{
+  font-size:32px;
   margin-bottom:15px;
 }
 
-.premium p{
-  color:#aaa;
-  line-height:1.6;
+.room h3{
+  margin-bottom:8px;
 }
 
-.premium-button{
-  display:inline-block;
+.room p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
 
-  margin-top:25px;
+.room-footer{
+  display:flex;
+  justify-content:space-between;
+  margin-top:18px;
+  color:#b7bcc9;
+  font-size:12px;
+}
 
-  padding:15px 30px;
+/* DISCOVER */
 
-  color:#e5a0bd;
+.discover{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
 
-  border:1px solid #e5a0bd;
-  border-radius:30px;
+.discover-card{
+  min-height:160px;
+  border-radius:18px;
+  padding:22px;
 
-  text-decoration:none;
+  display:flex;
+  flex-direction:column;
+  justify-content:end;
+
+  background:linear-gradient(135deg,#251b29,#11131a);
+  border:1px solid var(--border);
+}
+
+.discover-card:nth-child(2){
+  background:linear-gradient(135deg,#1d2138,#11131a);
+}
+
+.discover-card:nth-child(3){
+  background:linear-gradient(135deg,#1c302e,#11131a);
+}
+
+.discover-card h3{
+  margin-bottom:7px;
+}
+
+.discover-card p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* FEATURES */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.feature{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:22px;
+}
+
+.feature-icon{
+  font-size:28px;
+  margin-bottom:15px;
+}
+
+.feature h3{
+  margin-bottom:8px;
+}
+
+.feature p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* CREATOR CTA */
+
+.creator-cta{
+  max-width:1100px;
+  margin:30px auto 70px;
+
+  padding:45px;
+
+  border-radius:25px;
+
+  background:
+    linear-gradient(135deg,#21131d,#17132a);
+
+  border:1px solid #352b3b;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+}
+
+.creator-cta p{
+  color:var(--muted);
+  margin-top:10px;
+  line-height:1.5;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+
+  position:fixed;
+  inset:0;
+  z-index:200;
+
+  background:rgba(0,0,0,.75);
+
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+}
+
+.modal-box{
+  width:100%;
+  max-width:520px;
+
+  background:#11131a;
+  border:1px solid var(--border);
+
+  border-radius:22px;
+  padding:28px;
+
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:20px;
+  top:15px;
+
+  font-size:25px;
+  color:#999;
+
+  cursor:pointer;
+}
+
+.modal h2{
+  margin-bottom:10px;
+}
+
+.modal p{
+  color:var(--muted);
+  line-height:1.6;
+  font-size:14px;
+}
+
+.verify-step{
+  display:flex;
+  gap:15px;
+  align-items:center;
+
+  margin-top:18px;
+  padding:15px;
+
+  background:#191c25;
+  border-radius:12px;
+}
+
+.step-number{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+
+  background:#282c37;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-weight:bold;
+  color:var(--pink);
+}
+
+.status{
+  margin-top:20px;
+  padding:12px;
+  border-radius:10px;
+  background:#13251e;
+  color:var(--green);
+  font-size:13px;
 }
 
 /* FOOTER */
 
 footer{
+  border-top:1px solid var(--border);
+  padding:45px 5%;
   text-align:center;
-  padding:40px 20px;
-
-  border-top:1px solid #292929;
-
-  color:#777;
+  color:var(--muted);
 }
 
-footer strong{
-  color:#e5a0bd;
+.footer-logo{
+  color:var(--pink);
   font-size:25px;
   letter-spacing:4px;
+  font-weight:bold;
+  margin-bottom:15px;
 }
 
 /* MOBILE */
 
-@media(max-width:700px){
+@media(max-width:900px){
 
-  .logo{
-    font-size:27px;
+  .hero-grid{
+    grid-template-columns:1fr;
   }
 
-  .hero-content h1{
-    font-size:48px;
-    letter-spacing:7px;
+  .cards{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .hero-content p{
-    font-size:16px;
+  .features{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .section{
+  .rooms,
+  .discover{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  .nav{
+    height:auto;
+    min-height:65px;
+    padding:15px 20px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .nav-btn{
+    padding:9px 13px;
+  }
+
+  .hero{
     padding:55px 20px;
   }
 
-  .title{
-    font-size:32px;
+  .hero h1{
+    font-size:45px;
   }
 
-  .gallery{
+  .hero-grid{
+    gap:30px;
+  }
+
+  .cards,
+  .rooms,
+  .discover,
+  .features{
     grid-template-columns:1fr;
   }
 
-  .videos{
-    grid-template-columns:1fr;
+  .section{
+    padding:50px 20px;
   }
 
-  .card img{
-    height:430px;
+  .section h2{
+    font-size:28px;
   }
 
-  .video-box{
-    height:240px;
+  .creator-cta{
+    margin:20px;
+    padding:30px 22px;
+    display:block;
+  }
+
+  .creator-cta button{
+    margin-top:20px;
   }
 }
 </style>
 </head>
 
-
 <body>
+
+<!-- NAVIGATION -->
+
+<nav class="nav">
+
+  <div class="logo">VELVET</div>
+
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#live">Live</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#discover">Discover</a>
+  </div>
+
+  <button class="nav-btn" onclick="openLogin()">
+    Sign In
+  </button>
+
+</nav>
+
 
 <!-- HERO -->
 
 <section class="hero" id="home">
 
-  <nav>
-
-    <div class="logo">
-      VELVET
-    </div>
+  <div class="hero-grid">
 
     <div>
-      <a href="#home">Home</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#videos">Videos</a>
+
+      <div class="badge">
+        ✦ CREATOR SOCIAL PLATFORM
+      </div>
+
+      <h1>
+        Connect.<br>
+        <span>Go Live.</span><br>
+        Be Seen.
+      </h1>
+
+      <p>
+        VELVET is a next-generation creator platform
+        for live streaming, voice rooms, communities,
+        discovery and creator-fan connections.
+      </p>
+
+      <div class="hero-buttons">
+
+        <button class="primary" onclick="scrollToLive()">
+          🔴 Explore Live
+        </button>
+
+        <button class="secondary" onclick="openCreator()">
+          Become a Creator
+        </button>
+
+      </div>
+
     </div>
 
-  </nav>
+
+    <div class="live-preview">
+
+      <div class="live-screen">
+
+        <div>
+
+          <div class="live-label">
+            <span class="dot"></span>
+            LIVE NOW
+          </div>
+
+          <div class="live-avatar">
+            V
+          </div>
+
+          <h3 style="margin-top:18px;">
+            Velvet Creator
+          </h3>
+
+          <p style="margin-top:7px;color:#aaa;">
+            2.4K viewers
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
-  <div class="hero-content">
+<!-- LIVE -->
 
-    <h1>VELVET</h1>
+<section class="section" id="live">
 
-    <p>
-      Welcome to Velvet — a premium visual space
-      for photography, creators and exclusive content.
-    </p>
+  <div class="section-head">
 
-    <a href="#gallery" class="button">
-      EXPLORE GALLERY
+    <div>
+      <h2>🔴 Live Now</h2>
+    </div>
+
+    <a href="#">
+      View All →
     </a>
 
   </div>
 
-</section>
+
+  <div class="cards">
 
 
-<!-- GALLERY -->
+    <div class="creator-card">
 
-<section class="section" id="gallery">
+      <div class="creator-image">
 
-  <h2 class="title">
-    Featured Gallery
-  </h2>
+        <div class="live-pill">
+          LIVE
+        </div>
 
-  <p class="subtitle">
-    Explore the latest Velvet collection.
-  </p>
+        <div class="avatar">
+          A
+        </div>
 
+        <div class="viewer-count">
+          👁 2.4K
+        </div>
 
-  <div class="gallery">
+      </div>
 
+      <div class="creator-info">
 
-    <!-- IMAGE 1 -->
+        <h3>Alex Creator ✓</h3>
 
-    <div class="card">
+        <p>Chat & Lifestyle</p>
 
-      <img src="IMG_6251.jpeg"
-           alt="Velvet Photo 1">
-
-      <div class="card-content">
-
-        <h3>
-          Velvet Collection 01
-        </h3>
-
-        <p>
-          Featured Photo
-        </p>
+        <button class="watch-btn"
+                onclick="openRoom('Alex Creator')">
+          Join Live
+        </button>
 
       </div>
 
     </div>
 
 
-    <!-- IMAGE 2 -->
+    <div class="creator-card">
 
-    <div class="card">
+      <div class="creator-image two">
 
-      <img src="IMG_6256.jpeg"
-           alt="Velvet Photo 2">
+        <div class="live-pill">
+          LIVE
+        </div>
 
-      <div class="card-content">
+        <div class="avatar">
+          M
+        </div>
 
-        <h3>
-          Velvet Collection 02
-        </h3>
+        <div class="viewer-count">
+          👁 1.8K
+        </div>
 
-        <p>
-          Featured Photo
-        </p>
+      </div>
+
+      <div class="creator-info">
+
+        <h3>Maya Studio ✓</h3>
+
+        <p>Music & Conversation</p>
+
+        <button class="watch-btn"
+                onclick="openRoom('Maya Studio')">
+          Join Live
+        </button>
 
       </div>
 
     </div>
 
 
-    <!-- IMAGE 3 -->
+    <div class="creator-card">
 
-    <div class="card">
+      <div class="creator-image three">
 
-      <img src="photo1.jpeg"
-           alt="Velvet Photo 3">
+        <div class="live-pill">
+          LIVE
+        </div>
 
-      <div class="card-content">
+        <div class="avatar">
+          R
+        </div>
 
-        <h3>
-          Velvet Collection 03
-        </h3>
+        <div class="viewer-count">
+          👁 965
+        </div>
 
-        <p>
-          Featured Photo
-        </p>
+      </div>
+
+      <div class="creator-info">
+
+        <h3>Riya Live ✓</h3>
+
+        <p>Fitness & Lifestyle</p>
+
+        <button class="watch-btn"
+                onclick="openRoom('Riya Live')">
+          Join Live
+        </button>
 
       </div>
 
     </div>
 
 
-    <!-- IMAGE 4 -->
+    <div class="creator-card">
 
-    <div class="card">
+      <div class="creator-image four">
 
-      <img src="photo2.jpeg"
-           alt="Velvet Photo 4">
+        <div class="live-pill">
+          LIVE
+        </div>
 
-      <div class="card-content">
+        <div class="avatar">
+          J
+        </div>
 
-        <h3>
-          Velvet Collection 04
-        </h3>
-
-        <p>
-          Featured Photo
-        </p>
+        <div class="viewer-count">
+          👁 731
+        </div>
 
       </div>
 
-    </div>
+      <div class="creator-info">
 
+        <h3>Jay Talks ✓</h3>
 
-    <!-- IMAGE 5 -->
+        <p>Talk & Entertainment</p>
 
-    <div class="card">
-
-      <img src="photo3.jpeg"
-           alt="Velvet Photo 5">
-
-      <div class="card-content">
-
-        <h3>
-          Velvet Collection 05
-        </h3>
-
-        <p>
-          Featured Photo
-        </p>
+        <button class="watch-btn"
+                onclick="openRoom('Jay Talks')">
+          Join Live
+        </button>
 
       </div>
 
@@ -495,67 +928,79 @@ footer strong{
 </section>
 
 
-<!-- VIDEOS -->
+<!-- VOICE ROOMS -->
 
-<section class="section" id="videos">
+<section class="section" id="rooms">
 
-  <h2 class="title">
-    Featured Videos
-  </h2>
+  <div class="section-head">
 
-  <p class="subtitle">
-    Premium creator content.
-  </p>
+    <h2>🎙️ Voice Rooms</h2>
+
+    <a href="#">
+      Browse Rooms →
+    </a>
+
+  </div>
 
 
-  <div class="videos">
+  <div class="rooms">
 
 
-    <div class="video">
+    <div class="room">
 
-      <div class="video-box">
-
-        <div class="play">
-          ▶
-        </div>
-
+      <div class="room-icon">
+        🎙️
       </div>
 
-      <div class="video-content">
+      <h3>Late Night Talks</h3>
 
-        <h3>
-          Featured Video 01
-        </h3>
+      <p>
+        Join the conversation and meet new people.
+      </p>
 
-        <p>
-          Premium creator content.
-        </p>
-
+      <div class="room-footer">
+        <span>👥 342 listeners</span>
+        <span>🔴 Live</span>
       </div>
 
     </div>
 
 
-    <div class="video">
+    <div class="room">
 
-      <div class="video-box">
-
-        <div class="play">
-          ▶
-        </div>
-
+      <div class="room-icon">
+        🎵
       </div>
 
-      <div class="video-content">
+      <h3>Music Lounge</h3>
 
-        <h3>
-          Trending Video 02
-        </h3>
+      <p>
+        Artists and listeners hanging out together.
+      </p>
 
-        <p>
-          Popular this week.
-        </p>
+      <div class="room-footer">
+        <span>👥 218 listeners</span>
+        <span>🔴 Live</span>
+      </div>
 
+    </div>
+
+
+    <div class="room">
+
+      <div class="room-icon">
+        💬
+      </div>
+
+      <h3>Open Community</h3>
+
+      <p>
+        Meet creators and discuss what's trending.
+      </p>
+
+      <div class="room-footer">
+        <span>👥 127 listeners</span>
+        <span>🔴 Live</span>
       </div>
 
     </div>
@@ -566,42 +1011,385 @@ footer strong{
 </section>
 
 
-<!-- PREMIUM -->
+<!-- DISCOVER -->
 
-<section class="premium">
+<section class="section" id="discover">
 
-  <h2>
-    Join Velvet Premium
-  </h2>
+  <div class="section-head">
 
-  <p>
-    Unlock exclusive creator content,
-    premium galleries and more.
-  </p>
+    <h2>✨ Discover</h2>
 
-  <a href="#" class="premium-button">
-    JOIN PREMIUM
-  </a>
+    <a href="#">
+      Explore All →
+    </a>
+
+  </div>
+
+
+  <div class="discover">
+
+    <div class="discover-card">
+
+      <h3>Trending Creators</h3>
+
+      <p>
+        Discover creators people are watching now.
+      </p>
+
+    </div>
+
+
+    <div class="discover-card">
+
+      <h3>New Creators</h3>
+
+      <p>
+        Find fresh talent joining VELVET.
+      </p>
+
+    </div>
+
+
+    <div class="discover-card">
+
+      <h3>Popular Communities</h3>
+
+      <p>
+        Join conversations around your interests.
+      </p>
+
+    </div>
+
+  </div>
 
 </section>
+
+
+<!-- FEATURES -->
+
+<section class="section">
+
+  <div class="section-head">
+
+    <h2>Everything Creators Need</h2>
+
+  </div>
+
+
+  <div class="features">
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        🔴
+      </div>
+
+      <h3>Live Streaming</h3>
+
+      <p>
+        Creators can broadcast live and interact
+        with their audience.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        🎙️
+      </div>
+
+      <h3>Voice Rooms</h3>
+
+      <p>
+        Host public conversations with speakers,
+        listeners and moderators.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        ✓
+      </div>
+
+      <h3>Creator Verification</h3>
+
+      <p>
+        Identity and liveness verification can be
+        connected through a compliant KYC provider.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        🛡️
+      </div>
+
+      <h3>Safety Tools</h3>
+
+      <p>
+        Reports, blocking, moderation and
+        creator safety controls.
+      </p>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- CREATOR CTA -->
+
+<div class="creator-cta">
+
+  <div>
+
+    <h2>
+      Ready to become a creator?
+    </h2>
+
+    <p>
+      Build your community, go live and connect
+      with your audience.
+    </p>
+
+  </div>
+
+  <button class="primary"
+          onclick="openCreator()">
+    Start Creating
+  </button>
+
+</div>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+
+  <div class="modal-box">
+
+    <div class="close"
+         onclick="closeModal('loginModal')">
+      ×
+    </div>
+
+    <h2>Welcome to VELVET</h2>
+
+    <p>
+      Sign in to follow creators, join rooms
+      and participate in the community.
+    </p>
+
+    <button class="primary"
+            style="margin-top:25px;width:100%;"
+            onclick="demoLogin()">
+      Continue
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- CREATOR VERIFICATION MODAL -->
+
+<div class="modal" id="creatorModal">
+
+  <div class="modal-box">
+
+    <div class="close"
+         onclick="closeModal('creatorModal')">
+      ×
+    </div>
+
+    <h2>Creator Verification</h2>
+
+    <p>
+      Before live access is enabled, creators will
+      need to complete identity and liveness checks.
+    </p>
+
+
+    <div class="verify-step">
+
+      <div class="step-number">
+        1
+      </div>
+
+      <div>
+        <strong>Account Verification</strong>
+        <p>Email / phone verification</p>
+      </div>
+
+    </div>
+
+
+    <div class="verify-step">
+
+      <div class="step-number">
+        2
+      </div>
+
+      <div>
+        <strong>Identity Verification</strong>
+        <p>Verified identity through KYC provider</p>
+      </div>
+
+    </div>
+
+
+    <div class="verify-step">
+
+      <div class="step-number">
+        3
+      </div>
+
+      <div>
+        <strong>Liveness Check</strong>
+        <p>Live selfie / movement verification</p>
+      </div>
+
+    </div>
+
+
+    <div class="verify-step">
+
+      <div class="step-number">
+        4
+      </div>
+
+      <div>
+        <strong>Creator Approval</strong>
+        <p>Manual review when required</p>
+      </div>
+
+    </div>
+
+
+    <div class="status">
+      🛡️ Verification system ready for backend integration.
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- LIVE ROOM MODAL -->
+
+<div class="modal" id="roomModal">
+
+  <div class="modal-box">
+
+    <div class="close"
+         onclick="closeModal('roomModal')">
+      ×
+    </div>
+
+    <div class="live-label">
+      <span class="dot"></span>
+      LIVE ROOM
+    </div>
+
+    <h2 id="roomTitle">
+      Live Room
+    </h2>
+
+    <p style="margin-top:10px;">
+      This is the frontend preview of a live room.
+      Real streaming will be connected through a
+      live-streaming backend later.
+    </p>
+
+    <button class="primary"
+            style="margin-top:25px;width:100%;"
+            onclick="closeModal('roomModal')">
+      Enter Room
+    </button>
+
+  </div>
+
+</div>
 
 
 <!-- FOOTER -->
 
 <footer>
 
-  <strong>VELVET</strong>
+  <div class="footer-logo">
+    VELVET
+  </div>
 
-  <br><br>
+  <p>
+    Live creators · Voice rooms · Communities
+  </p>
 
-  18+ only · Terms · Privacy
-
-  <br><br>
-
-  © 2026 Velvet. All rights reserved.
+  <p style="margin-top:15px;">
+    © 2026 VELVET
+  </p>
 
 </footer>
 
+
+<script>
+
+function openLogin(){
+  document.getElementById("loginModal").style.display="flex";
+}
+
+function openCreator(){
+  document.getElementById("creatorModal").style.display="flex";
+}
+
+function closeModal(id){
+  document.getElementById(id).style.display="none";
+}
+
+function openRoom(name){
+
+  document.getElementById("roomTitle").innerText =
+    name + " — Live Room";
+
+  document.getElementById("roomModal").style.display="flex";
+}
+
+function scrollToLive(){
+
+  document.getElementById("live").scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+function demoLogin(){
+
+  alert(
+    "Demo login successful! Real authentication will be connected in the backend."
+  );
+
+  closeModal("loginModal");
+}
+
+window.onclick=function(event){
+
+  if(event.target.classList.contains("modal")){
+    event.target.style.display="none";
+  }
+
+};
+
+</script>
 
 </body>
 </html>
